@@ -82,13 +82,6 @@ public class SignUpActivity extends BaseActivity {
 
 
 
-        
-
-//        ALLOWED_CHARACTERS ="056789q1opaerhj234tyuiklsdfgwzxcvbnm";
-//        random=new Random();
-//        random_string=new StringBuilder(20);
-//        random_string.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
-
         btn_pickPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
