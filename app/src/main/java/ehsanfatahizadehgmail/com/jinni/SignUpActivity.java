@@ -81,6 +81,9 @@ public class SignUpActivity extends BaseActivity {
         mobile = sh.getString("mobile" , null);
 
 
+
+        
+
 //        ALLOWED_CHARACTERS ="056789q1opaerhj234tyuiklsdfgwzxcvbnm";
 //        random=new Random();
 //        random_string=new StringBuilder(20);
