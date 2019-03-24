@@ -20,7 +20,7 @@ public class RetrofitSetting {
         OkHttpClient client = new OkHttpClient();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://talaryaab.ir/")
+                .baseUrl("http://beh-navaz.ir/jinni-api/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CategoriesListActivity">
+
+
+
+    <RelativeLayout
+        android:id="@+id/relative_action_bar_categories_list"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/colorPrimaryDark">
+
+
+        <RelativeLayout
+            android:id="@+id/relative_back_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            >
+
+
+
+            <ImageView
+                android:id="@+id/arrow_back_category"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_arrow_right"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="دسته بندی قبل"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/my_white"
+                android:layout_toLeftOf="@+id/arrow_back_category"/>
+
+
+        </RelativeLayout>
+        
+        
+
+
+
+
+
+        <TextView
+            android:id="@+id/textview_title_categories_action_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:text="دسته بندی اصلی"
+            android:textColor="@color/my_white"/>
+
+
+
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/button_add_category_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_action_bar_categories_list"
+        android:text="اضافه کردن + "
+        android:textColor="@color/my_white"
+        android:background="@color/colorPrimary"
+        android:layout_margin="5dp"/>
+
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:id="@+id/expandableAddCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_add_category_list"
+        app:el_duration="400"
+        app:el_expanded="false"
+        app:el_parallax="0.5">
+
+        <RelativeLayout
+            android:id="@+id/relative_add_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_main1"
+            android:layout_margin="10dp"
+            android:padding="20dp">
+
+            <EditText
+                android:id="@+id/edittext_name_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="نام دسته بندی"/>
+
+
+            <Button
+                android:id="@+id/button_sabt_categor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_name_category"
+                android:text="ثبت"
+                android:layout_marginBottom="2dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#009900"/>
+
+
+        </RelativeLayout>
+
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_categories_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/expandableAddCategory"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"></android.support.v7.widget.RecyclerView>
+
+
+
+</RelativeLayout>

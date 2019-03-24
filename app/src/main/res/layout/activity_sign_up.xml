@@ -4,255 +4,158 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
-    android:background="@color/colorPrimaryDark">
-
-
+    android:background="@color/my_white"
+    tools:context=".SignUpActivity">
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/name_collec_sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/TextInputEditText"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                android:hint="نام مجموعه *"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/manager_sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/TextInputEditText"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                android:hint="نام مدیریت *"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/adress_sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/TextInputEditText"
-                android:imeOptions="actionNext"
-                android:maxLines="1"
-                android:hint="آدرس *"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="انتخاب صنف :"
-            android:layout_marginTop="20dp"/>
-
-
-        <RadioGroup
-            android:id="@+id/radio_group_sign_up"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
-            android:gravity="right">
+            android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/r_arayeshi"
-                android:layout_width="wrap_content"
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="drji"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                android:layout_marginTop="10dp">
 
-            <RadioButton
-                android:id="@+id/r_asbab"
-                android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/name_collec_sign_up"
+                    style="@style/TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="نام مجموعه *"
+                    android:textColor="@color/colorAccent"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="omned"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                android:layout_marginTop="10dp">
 
-            <RadioButton
-                android:id="@+id/r_amlak"
-                android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/manager_sign_up"
+                    style="@style/TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorAccent"
+                    android:hint="نام مدیریت *"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <Spinner
+                android:id="@+id/spinner_categories"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="zbvcv"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                />
 
-            <RadioButton
-                android:id="@+id/r_amuzeshgah"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinner_ostan"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="xcvb"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
 
-            <RadioButton
-                android:id="@+id/r_pushak"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/spinner_shahr"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="wefk"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
 
-            <RadioButton
-                android:id="@+id/r_khadamati"
-                android:layout_width="wrap_content"
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="left">
+
+
+
+                <TextView
+                    android:id="@+id/txt_pish_shomare_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:background="@drawable/back_txt_signup"
+                    android:layout_marginLeft="10dp"/>
+
+                <EditText
+                    android:id="@+id/edittext_telephone_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="تلفن ثابت"
+                    android:gravity="left"
+                    android:layout_marginLeft="10dp"/>
+
+
+
+            </LinearLayout>
+
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="uo"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                android:layout_marginTop="10dp">
 
-            <RadioButton
-                android:id="@+id/r_resturan"
-                android:layout_width="wrap_content"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/adress_sign_up"
+                    style="@style/TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorAccent"
+                    android:hint="آدرس *"
+                    android:imeOptions="actionNext"
+                    android:maxLines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+
+            <Button
+                android:id="@+id/upload_pic_sign_up"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="wef"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
+                android:background="@color/colorAccent"
+                android:text="آپلود عکس"
+                android:textColor="@color/my_white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/r_lavazem_elec"
-                android:layout_width="wrap_content"
+
+            <ImageView
+                android:id="@+id/imageview_Signup"
+                android:layout_width="350dp"
+                android:layout_height="350dp" />
+
+
+            <Button
+                android:id="@+id/btn_sabt_sign_up"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="oltr"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
-
-            <RadioButton
-                android:id="@+id/r_lavazem_khanegi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="jyuki"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
-
-            <RadioButton
-                android:id="@+id/r_lavazem_zinati"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="srgsr"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
-
-            <RadioButton
-                android:id="@+id/r_lavazem_musighi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="srbg"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
-
-            <RadioButton
-                android:id="@+id/r_namayeshgah"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="sdv"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
-
-            <RadioButton
-                android:id="@+id/r_motefareghe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="vss"
-                android:textColor="#FF6D6D6D"
-                android:textStyle="bold"
-                app:buttonTint="#FF6D6D6D" />
-        </RadioGroup>
+                android:background="@color/colorAccent"
+                android:text="ثبت"
+                android:textColor="@color/my_white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
-        <Button
-            android:id="@+id/upload_pic_sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="آپلود عکس"
-            android:background="@color/colorAccent"
-            android:textColor="@color/my_white"
-            android:textStyle="bold"
-            android:textSize="16sp"/>
-
-
-        <ImageView
-            android:id="@+id/imageview_Signup"
-            android:layout_width="350dp"
-            android:layout_height="350dp" />
-
-
-
-        <Button
-            android:id="@+id/btn_sabt_sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:textColor="@color/my_white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="ثبت"/>
-
-
-
-
-
-
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>

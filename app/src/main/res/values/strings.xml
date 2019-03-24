@@ -199,4 +199,8 @@
     <string name="ic_remove_red_eye">&#xE417;</string>
 
 
+    <string name="emptyEditText">نمی تواند خالی باشد</string>
+    <string name="tooShortAddress">خیلی کوتاه است</string>
+
+
 </resources>

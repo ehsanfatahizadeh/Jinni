@@ -107,11 +107,12 @@
                     android:layout_marginLeft="20dp"/>
 
                 <TextView
+                    android:id="@+id/new_product_home"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center_vertical|right"
                     android:paddingRight="20dp"
-                    android:text="شماره 2"
+                    android:text="ثبت محصول جدید"
                     android:textColor="@color/my_white"
                     android:textSize="16dp"/>
 
@@ -123,11 +124,12 @@
                     android:layout_marginLeft="20dp"/>
 
                 <TextView
+                    android:id="@+id/new_product_list_of_categories"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center_vertical|right"
                     android:paddingRight="20dp"
-                    android:text="شماره 3"
+                    android:text="لیست دسته بندی محصولات"
                     android:textColor="@color/my_white"
                     android:textSize="16dp"/>
 
