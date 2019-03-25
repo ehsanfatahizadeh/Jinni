@@ -157,6 +157,11 @@
 
                 </LinearLayout>
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_property__table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -209,7 +214,7 @@
 
 
                 <CheckBox
-                    android:id="@+id/checlbx_special"
+                    android:id="@+id/checkbox_special"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="ویژه"
@@ -220,13 +225,13 @@
 
 
                 <CheckBox
-                    android:id="@+id/checlbx_cheap"
+                    android:id="@+id/checkbox_cheap"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="حراجی"
                     android:textColor="#000"
                     android:layout_marginRight="50dp"
-                    android:layout_toLeftOf="@+id/checlbx_special"/>
+                    android:layout_toLeftOf="@+id/checkbox_special"/>
 
             </RelativeLayout>
 
@@ -235,14 +240,15 @@
                 android:id="@+id/old_price_new_p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="قیمت قدیمی"/>
+                android:hint="قیمت قدیمی"
+                android:visibility="gone"/>
 
 
             <EditText
                 android:id="@+id/name_vahed_new_p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="نام واحد"/>
+                android:hint="نام واحد" />
 
             <EditText
                 android:id="@+id/price_har_vahed_new_p"
@@ -328,6 +334,11 @@
 
                 </LinearLayout>
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_big_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -396,6 +407,14 @@
 
 
             </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_photos_new_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
 
 
 

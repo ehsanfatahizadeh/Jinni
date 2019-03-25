@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@drawable/backg_table">
+
+
+            <TextView
+                android:id="@+id/row_price_tedad_price"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="قیمت"
+                android:gravity="center"
+                android:textColor="#000"
+                android:layout_weight="1"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#000"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+
+                <TextView
+                    android:id="@+id/row_price_ta_tedad"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="تا"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:background="@drawable/backg_table"/>
+
+
+                <TextView
+                    android:id="@+id/row_price_az_tedad"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="از"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:layout_weight="1"
+                    android:background="@drawable/backg_table"/>
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>
