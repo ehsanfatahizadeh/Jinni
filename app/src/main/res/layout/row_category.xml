@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#33000000"
-    android:layout_marginTop="2dp">
+    android:background="@color/my_white"
+    android:layout_marginTop="1dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
 
 
@@ -24,7 +26,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="6dp"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/ic_action_arrow_left"/>
+        android:src="@drawable/jinni_logo1"/>
 
 
 

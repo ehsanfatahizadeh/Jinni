@@ -35,7 +35,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#000000"
-                android:tag="#000000"
+                android:tag="000000"
                 app:civ_border_width="1dp"
                 android:layout_weight="1"
                 app:civ_border_color="#FF000000"
@@ -45,7 +45,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_2"
-                android:tag="#190b7a"
+                android:tag="190b7a"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#190b7a"
@@ -57,7 +57,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_3"
-                android:tag="#0d127a"
+                android:tag="0d127a"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#0d127a"
@@ -70,7 +70,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_4"
-                android:tag="#052886"
+                android:tag="052886"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#052886"
@@ -83,7 +83,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_5"
-                android:tag="#004983"
+                android:tag="004983"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#004983"
@@ -96,7 +96,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_6"
-                android:tag="#00553f"
+                android:tag="00553f"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#00553f"
@@ -108,7 +108,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_7"
-                android:tag="#20571e"
+                android:tag="20571e"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#20571e"
@@ -121,7 +121,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_8"
-                android:tag="#5d4100"
+                android:tag="5d4100"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#5d4100"
@@ -134,7 +134,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_9"
-                android:tag="#7b3b02"
+                android:tag="7b3b02"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#7b3b02"
@@ -146,7 +146,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_10"
-                android:tag="#b21802"
+                android:tag="b21802"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#b21802"
@@ -158,7 +158,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_11"
-                android:tag="#900002"
+                android:tag="900002"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#900002"
@@ -171,7 +171,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_12"
-                android:tag="#bb0002"
+                android:tag="bb0002"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#bb0002"
@@ -183,7 +183,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_1_13"
-                android:tag="#390341"
+                android:tag="390341"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#390341"
@@ -210,7 +210,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_1"
-                android:tag="#56585A"
+                android:tag="56585A"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#56585A"
@@ -223,7 +223,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_2"
-                android:tag="#4436c1"
+                android:tag="4436c1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#4436c1"
@@ -235,7 +235,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_3"
-                android:tag="#1b4acc"
+                android:tag="1b4acc"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#1b4acc"
@@ -248,7 +248,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_4"
-                android:tag="#0b5ec1"
+                android:tag="0b5ec1"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#0b5ec1"
@@ -261,7 +261,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_5"
-                android:tag="#02669a"
+                android:tag="02669a"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#02669a"
@@ -273,7 +273,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_6"
-                android:tag="#047154"
+                android:tag="047154"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#047154"
@@ -286,7 +286,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_7"
-                android:tag="#347121"
+                android:tag="347121"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#347121"
@@ -298,7 +298,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_8"
-                android:tag="#bb6706"
+                android:tag="bb6706"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#bb6706"
@@ -310,7 +310,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_9"
-                android:tag="#935500"
+                android:tag="935500"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#935500"
@@ -323,7 +323,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_10"
-                android:tag="#a93005"
+                android:tag="a93005"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#a93005"
@@ -335,7 +335,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_11"
-                android:tag="#c10503"
+                android:tag="c10503"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#c10503"
@@ -347,7 +347,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_12"
-                android:tag="#ca0a07"
+                android:tag="ca0a07"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#ca0a07"
@@ -359,7 +359,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_2_13"
-                android:tag="#890b6e"
+                android:tag="890b6e"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#890b6e"
@@ -384,7 +384,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_1"
-                android:tag="#8D8E8F"
+                android:tag="8D8E8F"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#8D8E8F"
@@ -397,7 +397,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_2"
-                android:tag="#7963d0"
+                android:tag="7963d0"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#7963d0"
@@ -409,7 +409,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_3"
-                android:tag="#4e74df"
+                android:tag="4e74df"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#4e74df"
@@ -422,7 +422,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_4"
-                android:tag="#198be4"
+                android:tag="198be4"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#198be4"
@@ -435,7 +435,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_5"
-                android:tag="#15a8dc"
+                android:tag="15a8dc"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#15a8dc"
@@ -447,7 +447,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_6"
-                android:tag="#1ca780"
+                android:tag="1ca780"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#1ca780"
@@ -460,7 +460,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_7"
-                android:tag="#55963c"
+                android:tag="55963c"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#55963c"
@@ -472,7 +472,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_8"
-                android:tag="#a19414"
+                android:tag="a19414"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#a19414"
@@ -484,7 +484,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_9"
-                android:tag="#c07e06"
+                android:tag="c07e06"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#c07e06"
@@ -497,7 +497,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_10"
-                android:tag="#db5903"
+                android:tag="db5903"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#db5903"
@@ -509,7 +509,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_11"
-                android:tag="#f01d00"
+                android:tag="f01d00"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#f01d00"
@@ -521,7 +521,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_12"
-                android:tag="#e0211b"
+                android:tag="e0211b"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#e0211b"
@@ -533,7 +533,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_3_13"
-                android:tag="#b83e75"
+                android:tag="b83e75"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#b83e75"
@@ -558,7 +558,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_1"
-                android:tag="#d7d6dc"
+                android:tag="d7d6dc"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#d7d6dc"
@@ -571,7 +571,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_2"
-                android:tag="#9f8fd8"
+                android:tag="9f8fd8"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#9f8fd8"
@@ -583,7 +583,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_3"
-                android:tag="#7fa5ec"
+                android:tag="7fa5ec"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#7fa5ec"
@@ -596,7 +596,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_4"
-                android:tag="#5aadf3"
+                android:tag="5aadf3"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#5aadf3"
@@ -609,7 +609,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_5"
-                android:tag="#5fc1f2"
+                android:tag="5fc1f2"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#5fc1f2"
@@ -621,7 +621,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_6"
-                android:tag="#5bc2a5"
+                android:tag="5bc2a5"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#5bc2a5"
@@ -634,7 +634,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_7"
-                android:tag="#7fc157"
+                android:tag="7fc157"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#7fc157"
@@ -646,7 +646,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_8"
-                android:tag="#dac430"
+                android:tag="dac430"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#dac430"
@@ -658,7 +658,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_9"
-                android:tag="#efab1c"
+                android:tag="efab1c"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#efab1c"
@@ -671,7 +671,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_10"
-                android:tag="#ed731e"
+                android:tag="ed731e"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#ed731e"
@@ -683,7 +683,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_11"
-                android:tag="#ee5c2b"
+                android:tag="ee5c2b"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#ee5c2b"
@@ -695,7 +695,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_12"
-                android:tag="#e75c59"
+                android:tag="e75c59"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#e75c59"
@@ -707,7 +707,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_4_13"
-                android:tag="#b77a9c"
+                android:tag="b77a9c"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#b77a9c"
@@ -735,7 +735,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_1"
-                android:tag="#fff"
+                android:tag="ffffff"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#fff"
@@ -748,7 +748,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_2"
-                android:tag="#c7bfee"
+                android:tag="c7bfee"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#c7bfee"
@@ -760,7 +760,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_3"
-                android:tag="#aaccfc"
+                android:tag="aaccfc"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#aaccfc"
@@ -773,7 +773,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_4"
-                android:tag="#9dcdfd"
+                android:tag="9dcdfd"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#9dcdfd"
@@ -786,7 +786,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_5"
-                android:tag="#a5daf9"
+                android:tag="a5daf9"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#a5daf9"
@@ -798,7 +798,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_6"
-                android:tag="#a8dbd6"
+                android:tag="a8dbd6"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#a8dbd6"
@@ -811,7 +811,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_7"
-                android:tag="#c6db90"
+                android:tag="c6db90"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#c6db90"
@@ -823,7 +823,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_8"
-                android:tag="#f0e06f"
+                android:tag="f0e06f"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#f0e06f"
@@ -835,7 +835,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_9"
-                android:tag="#f2c46e"
+                android:tag="f2c46e"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#f2c46e"
@@ -848,7 +848,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_10"
-                android:tag="#efa870"
+                android:tag="efa870"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#efa870"
@@ -860,7 +860,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_11"
-                android:tag="#e89176"
+                android:tag="e89176"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#e89176"
@@ -872,7 +872,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_12"
-                android:tag="#db8c88"
+                android:tag="db8c88"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#db8c88"
@@ -884,7 +884,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ccolor_5_13"
-                android:tag="#c6a3c4"
+                android:tag="c6a3c4"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="#c6a3c4"
@@ -917,6 +917,17 @@
 
 
 
+        <Button
+            android:id="@+id/submit_colors_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="ثبت"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:background="#F44336"
+            android:layout_margin="5dp"/>
 
 
     </LinearLayout>

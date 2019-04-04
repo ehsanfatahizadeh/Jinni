@@ -108,6 +108,15 @@ public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
+    public void add_list (List<String> list_az ,List<String> list_ta , List<String> list_price){
+        this.list_az=list_az;
+        this.list_ta=list_ta;
+        this.list_price=list_price;
+        notifyDataSetChanged();
+    }
+
+
+
     public void add_row (String list_az ,String list_ta , String list_price){
         this.list_az.add(list_az);
         this.list_ta.add(list_ta);

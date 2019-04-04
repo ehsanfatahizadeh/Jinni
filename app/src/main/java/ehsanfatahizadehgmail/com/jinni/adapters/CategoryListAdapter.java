@@ -99,6 +99,9 @@ public class CategoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     public void add_list (List<CategoriesList> list){
+        if (this.list.size()>0){
+            this.list.clear();
+        }
         this.list = list;
         notifyDataSetChanged();
     }

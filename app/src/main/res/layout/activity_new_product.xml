@@ -19,6 +19,35 @@
             android:orientation="vertical">
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/checkbox_code_new_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تعریف کردن کد محصول"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <EditText
+                    android:id="@+id/edittext_code_new_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkbox_code_new_p"
+                    android:hint="کد محصول را وارد کنید"
+                    android:visibility="gone"
+                    />
+
+
+            </RelativeLayout>
+
+
+
+
+
+
             <EditText
                 android:id="@+id/mahiat_edittext_new_p"
                 android:layout_width="match_parent"

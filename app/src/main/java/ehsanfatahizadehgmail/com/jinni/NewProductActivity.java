@@ -36,18 +36,21 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import ehsanfatahizadehgmail.com.jinni.adapters.CategoryListAdapter;
 import ehsanfatahizadehgmail.com.jinni.adapters.ColorsAdapter;
@@ -112,8 +115,34 @@ public class NewProductActivity extends AppCompatActivity {
 
     RecyclerView recycler_photos;
     Button btn_add_photo;
-    Intent GalIntent;;
+    Intent GalIntent;
     PhotosProductAdapter adapter_photos;
+
+    Button btn_send_info;
+
+
+    EditText description;
+    EditText name_vahed , gheymate_vahed , vahede_zaribe_sefaresh , zaribe_sefaresh;
+
+
+
+    List<String> final_color_list;
+    List<String> final_sizes_list;
+    List<String> final_descrip_list;
+    List<String> final_properties_list;
+    List<String> final_tedad_az_lis;
+    List<String> final_tedad_ta_list;
+    List<String> final_tedad_price_list;
+
+
+
+    String mobile;
+
+
+
+    CheckBox checkBox_code;
+    EditText edt_code;
+
 
 
     @Override
@@ -121,6 +150,50 @@ public class NewProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_product);
 
+        encoded_photos_list = new ArrayList<>();
+
+        checkBox_code = (CheckBox) findViewById(R.id.checkbox_code_new_p);
+        edt_code = (EditText) findViewById(R.id.edittext_code_new_p);
+
+
+        checkBox_code.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    edt_code.setVisibility(View.VISIBLE);
+                }else{
+                    edt_code.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+
+
+        name_vahed = (EditText) findViewById(R.id.name_vahed_new_p);
+        gheymate_vahed = (EditText) findViewById(R.id.price_har_vahed_new_p);
+        vahede_zaribe_sefaresh = (EditText) findViewById(R.id.vahed_zarib_sefaresh_new_p);
+        zaribe_sefaresh = (EditText) findViewById(R.id.zarib_sefaresh_new_p);
+
+
+
+
+        mahiat = (EditText) findViewById(R.id.mahiat_edittext_new_p);
+        jensiat = (EditText) findViewById(R.id.jensiat_edittext_new_p);
+        brand = (EditText) findViewById(R.id.brand_edittext_new_p);
+        model = (EditText) findViewById(R.id.model_edittext_new_p);
+        special_property = (EditText) findViewById(R.id.special_property_edittext_new_p);
+        size_titr = (EditText) findViewById(R.id.size_titr_edittext_new_p);
+        description = (EditText) findViewById(R.id.description_edittext_new_p);
+
+
+        btn_send_info = (Button) findViewById(R.id.button_new_p_final_sabt);
+        btn_send_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Validate();
+            }
+        });
 
         tw_choose_category = (TextView) findViewById(R.id.add_to_category_edittext_new_p);
         btn_add_size = (Button) findViewById(R.id.button_add_size_new_p);
@@ -230,7 +303,7 @@ public class NewProductActivity extends AppCompatActivity {
 
 
         SharedPreferences sh = getSharedPreferences(Constants.SHARED_USER , MODE_PRIVATE);
-        final String mobile = sh.getString("mobile" , null);
+        mobile = sh.getString("mobile" , null);
 
 
 
@@ -251,7 +324,7 @@ public class NewProductActivity extends AppCompatActivity {
 
 
 
-        adapter_size = new SizesAdapter(NewProductActivity.this);
+        adapter_size = new SizesAdapter(NewProductActivity.this , 1);
         recycler_sizes.setLayoutManager(new LinearLayoutManager(NewProductActivity.this , LinearLayoutManager.HORIZONTAL , false));
         recycler_sizes.setAdapter(adapter_size);
 
@@ -303,6 +376,7 @@ public class NewProductActivity extends AppCompatActivity {
 
                         if (categoriesList.num_of_subs.equals("0")){
                             tw_choose_category.setText(categoriesList.getName());
+                            tw_choose_category.setTag(categoriesList.getId());
                             alertDialog.dismiss();
                         }else {
                             new getCategories(mobile, categoriesList.getId()).execute();
@@ -340,6 +414,7 @@ public class NewProductActivity extends AppCompatActivity {
 
 //                List<String> colors_list = new ArrayList<>();
                 RecyclerView recycler_colors = (RecyclerView) dialogView.findViewById(R.id.recycler_colors);
+                Button submit_colors = (Button)dialogView.findViewById(R.id.submit_colors_alert);
                 adapter = new ColorsAdapter(NewProductActivity.this);
                 recycler_colors.setLayoutManager(new LinearLayoutManager(NewProductActivity.this , LinearLayoutManager.HORIZONTAL , false));
                 recycler_colors.setAdapter(adapter);
@@ -347,6 +422,12 @@ public class NewProductActivity extends AppCompatActivity {
 
 
 
+                submit_colors.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
 
 
                 adapter.setOnItemClickListener(new ColorsAdapter.ClickListener() {
@@ -355,6 +436,8 @@ public class NewProductActivity extends AppCompatActivity {
                         adapter.delete_color(position);
                     }
                 });
+
+
 
 
 
@@ -847,7 +930,7 @@ public class NewProductActivity extends AppCompatActivity {
     }
 
 
-    List<CategoriesList> list;
+    List<CategoriesList> list = new ArrayList<CategoriesList>();
 
     public class getCategories extends AsyncTask {
 
@@ -895,8 +978,10 @@ public class NewProductActivity extends AppCompatActivity {
             super.onPostExecute(o);
 
 //            int num = path_father.size();
-            Log.d("size of list " , String.valueOf(list.size()));
-            adapter_categories.add_list(list);
+//            Log.d("size of list " , String.valueOf(list.size()));
+            if (!list.isEmpty()) {
+                adapter_categories.add_list(list);
+            }
             dialog.dismiss();
 
 //            if (num != 0){
@@ -1001,6 +1086,7 @@ public class NewProductActivity extends AppCompatActivity {
     }
 
 
+    List<String> encoded_photos_list;
     String encoded_image;
     Uri final_image;
     Uri selectedImage;
@@ -1070,9 +1156,9 @@ public class NewProductActivity extends AppCompatActivity {
         }
         else if (requestCode == Constants.INT_CROP && resultCode == RESULT_OK){
             adapter_photos.add_row(final_image);
-//            img.setImageURI(final_image);
             encoded_image = getEncodedImage(final_image);
-            Log.d("photo is  : " , " "+encoded_image);
+            encoded_photos_list.add(encoded_image);
+//            Log.d("photo is  : " , " "+encoded_image);
         }
         else if (requestCode == Constants.INT_PICK_GALLERY && resultCode == RESULT_OK){
 
@@ -1228,6 +1314,305 @@ public class NewProductActivity extends AppCompatActivity {
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
     }
+
+
+
+
+
+
+
+
+    void Validate(){
+
+        checkBox_code = (CheckBox) findViewById(R.id.checkbox_code_new_p);
+        String code;
+        if (checkBox_code.isChecked()){
+            code = edt_code.getText().toString().trim();
+        }else {
+            String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder salt = new StringBuilder();
+            Random rnd = new Random();
+            while (salt.length() < 10) { // length of the random string.
+                int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+                salt.append(SALTCHARS.charAt(index));
+            }
+            code = salt.toString();
+        }
+
+
+        String s_mahiat = mahiat.getText().toString().trim();
+        String s_jensiat = jensiat.getText().toString().trim();
+        String s_brand = brand.getText().toString().trim();
+        String s_model = model.getText().toString().trim();
+        String s_special_property = special_property.getText().toString().trim();
+        String s_size_titr = size_titr.getText().toString().trim();
+
+
+        final_color_list = adapter.colors;
+        final_sizes_list = adapter_size.sizes;
+
+
+        String s_category = tw_choose_category.getTag().toString();
+        String s_description = description.getText().toString().trim();
+
+
+        final_descrip_list = adapter_property.list_descrip;
+        final_properties_list = adapter_property.list_properties;
+
+
+        String s_haraji;
+        String s_special;
+        if (checkbox_haraji.isChecked()){
+            s_haraji = old_price.getText().toString().trim();
+        }else{
+            s_haraji = "no";
+        }
+        if (checkbox_special.isChecked()){
+            s_special = "yes";
+        }else{
+            s_special = "no";
+        }
+
+        String s_name_vahed = name_vahed.getText().toString().trim();
+        String s_gheymate_vahed = gheymate_vahed.getText().toString().trim();
+        String s_vahede_zaribe_sefaresh = vahede_zaribe_sefaresh.getText().toString().trim();
+        String s_zaribe_sefaresh = zaribe_sefaresh.getText().toString().trim();
+
+
+        final_tedad_az_lis = adapter_tedad.list_az;
+        final_tedad_ta_list = adapter_tedad.list_ta;
+        final_tedad_price_list = adapter_tedad.list_price;
+
+
+//        encoded_photos_list;
+
+//        if (s_mahiat.equals("")){
+//            s_mahiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_brand.equals("")){
+//            s_brand = "nothing";
+//        }else if (s_model.equals("")){
+//            s_model = "nothing";
+//        }else if (s_special_property.equals("")){
+//            s_special_property = "nothing";
+//        }else if (s_size_titr.equals("")){
+//            s_size_titr = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }
+
+
+
+
+
+
+
+
+//        Log.d("s_mahiat" , s_mahiat);
+//        Log.d("s_jensiat" ,s_jensiat );
+//        Log.d("s_brand" ,s_brand );
+//        Log.d("s_model" , s_model);
+//        Log.d("s_special_property" , s_special_property);
+//        Log.d("s_size_titr" , s_size_titr);
+//
+//        Log.d("final_color_list" , final_color_list.toString());
+//        Log.d("final_sizes_list" ,final_sizes_list.toString() );
+//
+//        Log.d("s_category" , s_category);
+//        Log.d("s_description" ,s_description );
+//
+//        Log.d("final_descrip_list" , final_descrip_list.toString());
+//        Log.d("final_properties_list" , final_properties_list.toString());
+//
+//        Log.d("s_haraji" , s_haraji);
+//        Log.d("s_special" , s_special);
+//
+//        Log.d("s_name_vahed" , s_name_vahed);
+//        Log.d("s_gheymate_vahed" ,s_gheymate_vahed );
+//        Log.d("s_vahede_zaribe_se" ,s_vahede_zaribe_sefaresh );
+//        Log.d("s_zaribe_sefaresh" ,s_zaribe_sefaresh );
+//
+//        Log.d("final_tedad_az_lis" ,final_tedad_az_lis.toString() );
+//        Log.d("final_tedad_ta_list" , final_tedad_ta_list.toString());
+//        Log.d("final_tedad_price_list" , final_tedad_price_list.toString());
+//        Log.d("encoded_photos_list" , encoded_photos_list.toString());
+
+
+
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray_colors;
+        try {
+
+            jsonArray_colors = new JSONArray();
+            for (int i=0 ; i < final_color_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("name" , final_color_list.get(i));
+                jsonArray_colors.put(jo);
+            }
+
+
+            JSONArray jsonArray_sizes;
+            jsonArray_sizes = new JSONArray();
+            for (int i=0 ; i < final_sizes_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("name" , final_sizes_list.get(i));
+                jsonArray_sizes.put(jo);
+            }
+
+
+
+            JSONArray jsonArray_property;
+            jsonArray_property = new JSONArray();
+            for (int i=0 ; i < final_properties_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("name" , final_properties_list.get(i));
+                jo.put("description" , final_descrip_list.get(i));
+                jsonArray_property.put(jo);
+            }
+
+
+
+            JSONArray jsonArray_prices;
+            jsonArray_prices = new JSONArray();
+            for (int i=0 ; i < final_tedad_az_lis.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("az" , final_tedad_az_lis.get(i));
+                jo.put("ta" , final_tedad_ta_list.get(i));
+                jo.put("price" , final_tedad_price_list.get(i));
+                jsonArray_prices.put(jo);
+            }
+
+
+            JSONArray jsonArray_photos;
+            jsonArray_photos = new JSONArray();
+            for (int i=0 ; i < encoded_photos_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("photo" , encoded_photos_list.get(i));
+                jsonArray_photos.put(jo);
+            }
+
+
+
+            jsonObject.put("mobile",mobile);
+            jsonObject.put("code",code);
+            jsonObject.put("mahiat",s_mahiat);
+            jsonObject.put("jensiat",s_jensiat);
+            jsonObject.put("brand",s_brand);
+            jsonObject.put("model",s_model);
+            jsonObject.put("special_property",s_special_property);
+            jsonObject.put("size_titr",s_size_titr);
+            jsonObject.put("colors" , jsonArray_colors);
+            jsonObject.put("sizes" , jsonArray_sizes);
+            jsonObject.put("category" , s_category);
+            jsonObject.put("description" , s_description);
+            jsonObject.put("properties" , jsonArray_property);
+            jsonObject.put("haraji" , s_haraji);
+            jsonObject.put("special" , s_special);
+            jsonObject.put("name_vahed" , s_name_vahed);
+            jsonObject.put("gheymate_vahed" , s_gheymate_vahed);
+            jsonObject.put("vahede_zaribe_se" , s_vahede_zaribe_sefaresh);
+            jsonObject.put("zaribe_sefaresh" , s_zaribe_sefaresh);
+            jsonObject.put("prices" , jsonArray_prices);
+            jsonObject.put("photos" , jsonArray_photos);
+
+
+            Log.d("Array is ", jsonObject.toString());
+
+
+
+
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        new thread_send_new_product(jsonObject.toString()).execute();
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public class thread_send_new_product extends AsyncTask {
+
+
+        String json_new_p;
+
+        public thread_send_new_product(String json_new_p){
+
+            this.json_new_p = json_new_p;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+
+        String result;
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Call<String> call = apis.sendNewProduct(json_new_p);
+
+            try {
+                Response<String> response = call.execute();
+
+                if(!response.isSuccessful()) {
+                    Toast.makeText(NewProductActivity.this, "errrror", Toast.LENGTH_SHORT).show();
+                    return null;
+                }
+                result = response.body();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            dialog.dismiss();
+            if (result != null) {
+                if (result.equals("1")) {
+                    finish();
+                    Toast.makeText(NewProductActivity.this, "اطلاعات با موفقیت ارسال شد.", Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                Toast.makeText(NewProductActivity.this, "خطا در ارسال اطلاعات \n دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
 
 
 

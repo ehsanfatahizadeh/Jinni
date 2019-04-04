@@ -16,7 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CategoriesListActivity"></activity>
+        <activity android:name=".EditProductActivity"></activity>
+        <activity android:name=".ProductActivity" />
+        <activity android:name=".ProductsOfCategoryActivity" />
+        <activity android:name=".CategoriesHomeActivity" />
+        <activity android:name=".CategoriesListActivity" />
         <activity android:name=".NewProductActivity" />
 
         <provider

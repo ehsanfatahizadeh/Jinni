@@ -52,7 +52,7 @@ public class ColorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holderMain, int position) {
 
             ViewHolder holder = (ViewHolder) holderMain;
-            holder.img.setBackgroundColor(Color.parseColor(colors.get(position)));
+            holder.img.setBackgroundColor(Color.parseColor("#"+colors.get(position)));
     }
 
     @Override
@@ -103,6 +103,13 @@ public class ColorsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 //        talarList.clear();
 //        notifyDataSetChanged();
 //    }
+
+
+    public void add_list (List<String> c){
+        colors = c;
+        notifyDataSetChanged();
+    }
+
 
 
     public void add_color (String c){

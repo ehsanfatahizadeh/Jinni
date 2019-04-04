@@ -6,6 +6,10 @@
 
 
 
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,6 +47,12 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageview_close_row_property"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/close_ic"
+        android:layout_centerInParent="true"/>
 
 
 </RelativeLayout>

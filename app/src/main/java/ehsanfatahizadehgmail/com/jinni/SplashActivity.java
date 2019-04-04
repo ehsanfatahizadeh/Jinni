@@ -39,6 +39,7 @@ public class SplashActivity extends BaseActivity {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                return null;
             }
 
 

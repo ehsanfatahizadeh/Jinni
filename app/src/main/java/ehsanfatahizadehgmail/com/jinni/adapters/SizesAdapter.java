@@ -19,10 +19,11 @@ public class SizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static ClickListener clickListener;
 
 
+    int WHAT_ACTIVITY;
 
 
-
-    public SizesAdapter(Context context ){
+    public SizesAdapter(Context context , int WHAT_ACTIVITY ){
+        this.WHAT_ACTIVITY = WHAT_ACTIVITY;
         this.context = context;
         sizes = new ArrayList<>();
     }
@@ -50,7 +51,13 @@ public class SizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         ViewHolder holder = (ViewHolder) holderMain;
         holder.txt_size.setText(sizes.get(position));
-        Log.d("--setText " , sizes.get(position));
+
+        if (WHAT_ACTIVITY==2){
+            holder.close.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     @Override
@@ -63,13 +70,21 @@ public class SizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txt_size;
+        View close;
 
         ViewHolder(View itemView) {
             super(itemView);
 
 
             txt_size = (TextView) itemView.findViewById(R.id.textview_row_size);
-            itemView.setOnClickListener(this);
+            close = (View) itemView.findViewById(R.id.row_size_close);
+
+            if (WHAT_ACTIVITY==1){
+                itemView.setOnClickListener(this);
+            }
+
+
+
 
         }
 
@@ -80,6 +95,11 @@ public class SizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
 
+    }
+
+    public void add_list (List<String> list){
+        sizes = list;
+        notifyDataSetChanged();
     }
 
 
