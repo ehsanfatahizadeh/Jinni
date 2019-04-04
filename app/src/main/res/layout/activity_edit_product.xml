@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditProductActivity">
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <EditText
+                    android:id="@+id/edittext_code_new_p_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/checkbox_code_new_p"
+                    android:hint="کد محصول را وارد کنید"
+                    />
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+            <EditText
+                android:id="@+id/mahiat_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ماهیت"/>
+
+
+            <EditText
+                android:id="@+id/jensiat_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="جنسیت"/>
+
+            <EditText
+                android:id="@+id/brand_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="برند"/>
+
+
+            <EditText
+                android:id="@+id/model_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="مدل"/>
+
+
+            <EditText
+                android:id="@+id/special_property_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ویژگی خاص"/>
+
+            <EditText
+                android:id="@+id/size_titr_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="سایز یا ظرفیت"/>
+
+            <TextView
+                android:id="@+id/colors_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="انتخاب رنگ ها"
+                android:background="#FF5656"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dp"/>
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_add_size_new_p_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="اضافه"/>
+
+                <EditText
+                    android:id="@+id/edittext_size_new_p_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:hint="سایزهای خود را وارد کنید"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_size_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"></android.support.v7.widget.RecyclerView>
+
+
+            <TextView
+                android:id="@+id/add_to_category_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="اضافه کردن به دسته بندی"
+                android:textColor="#0000aa"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="#7171B1"/>
+
+
+            <EditText
+                android:id="@+id/description_edittext_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="توضیحات"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/backg_table">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="توضیحات"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_weight="1"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="مشخصات کلی"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_property__table_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/backg_table">
+
+
+                    <EditText
+                        android:id="@+id/edt_table_description_edit_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="efeef"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_weight="1"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"/>
+
+                    <EditText
+                        android:id="@+id/edt_table_properties_edit_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="efeef"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_weight="1"/>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_add_property_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="اضافه کردن"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+
+                <CheckBox
+                    android:id="@+id/checkbox_special_edit_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="ویژه"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000"
+                    android:layout_alignParentRight="true"/>
+
+
+
+                <CheckBox
+                    android:id="@+id/checkbox_cheap_edit_p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="حراجی"
+                    android:textColor="#000"
+                    android:layout_marginRight="50dp"
+                    android:layout_toLeftOf="@+id/checkbox_special_edit_p"/>
+
+            </RelativeLayout>
+
+
+            <EditText
+                android:id="@+id/old_price_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="قیمت قدیمی"
+                android:visibility="gone"/>
+
+
+            <EditText
+                android:id="@+id/name_vahed_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="نام واحد" />
+
+            <EditText
+                android:id="@+id/price_har_vahed_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="قیمت هر واحد"/>
+
+            <EditText
+                android:id="@+id/vahed_zarib_sefaresh_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="واحد ضریب سفارش"/>
+
+            <EditText
+                android:id="@+id/zarib_sefaresh_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ضریب سفارش"/>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/backg_table">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="قیمت"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_weight="1"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="تا"
+                            android:gravity="center"
+                            android:textColor="#000"
+                            android:layout_weight="1"
+                            android:background="@drawable/backg_table"/>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="از"
+                            android:gravity="center"
+                            android:textColor="#000"
+                            android:layout_weight="1"
+                            android:background="@drawable/backg_table"/>
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_big_price_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/backg_table">
+
+
+                    <EditText
+                        android:id="@+id/edt_new_p_price_row_edit_p"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="efeef"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_weight="1"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+
+
+                        <EditText
+                            android:id="@+id/edt_new_p_ta_row_edit_p"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:textColor="#000"
+                            android:layout_weight="1"
+                            android:hint="sfsrfsf"/>
+
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#000"/>
+
+
+                        <EditText
+                            android:id="@+id/edt_new_p_az_row_edit_p"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:textColor="#000"
+                            android:hint="srfrsfs"
+                            android:layout_weight="1" />
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_add_row_price_table_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="اضافه کردن"/>
+
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_photos_new_p_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+
+
+            <Button
+                android:id="@+id/button_add_pictures_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="اضافه کردن عکس"
+                android:background="@color/colorPrimary"
+                android:textColor="#fff"/>
+
+
+
+            <Button
+                android:id="@+id/button_new_p_final_sabt_edit_p"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorAccent"
+                android:text="ثبت"
+                android:textColor="#fff"/>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+</RelativeLayout>
