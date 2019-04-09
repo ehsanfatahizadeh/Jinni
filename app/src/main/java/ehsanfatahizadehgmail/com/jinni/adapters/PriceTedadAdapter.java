@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ehsanfatahizadehgmail.com.jinni.ProductActivity;
 import ehsanfatahizadehgmail.com.jinni.R;
 
 public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -64,6 +66,13 @@ public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
 
+        if (context instanceof ProductActivity){
+            holder.img.setVisibility(View.GONE);
+        }else {
+            holder.img.setVisibility(View.VISIBLE);
+        }
+
+
 //        if (Integer.parseInt(categoriesList.getNum_of_subs()) == 0){
 //            holder.img.setVisibility(View.GONE);
 //        }else {
@@ -84,7 +93,7 @@ public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tw_price;
         TextView tw_az;
         TextView tw_ta;
-        //        ImageView img;
+        ImageView img;
         ViewHolder(View itemView) {
             super(itemView);
 
@@ -92,17 +101,19 @@ public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             tw_price = (TextView) itemView.findViewById(R.id.row_price_tedad_price);
             tw_az = (TextView) itemView.findViewById(R.id.row_price_az_tedad);
             tw_ta = (TextView) itemView.findViewById(R.id.row_price_ta_tedad);
-//            img = (ImageView) itemView.findViewById(R.id.imageview_arrow_row_category);
+            img = (ImageView) itemView.findViewById(R.id.row_price_imageview_close);
 
 
-            itemView.setOnClickListener(this);
+
+
+            img.setOnClickListener(this);
 
         }
 
 
         @Override
         public void onClick(View v) {
-//            clickListener.onItemClick(getAdapterPosition(), list_properties.get(getAdapterPosition()) , list_descrip.get(getAdapterPosition()));
+            clickListener.onItemClick(getAdapterPosition());
         }
 
     }
@@ -124,7 +135,10 @@ public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    public void delete_row (String new_properties ,String new_descrip){
+    public void delete_row (int position){
+        list_az.remove(position);
+        list_ta.remove(position);
+        list_price.remove(position);
         notifyDataSetChanged();
     }
 
@@ -137,7 +151,7 @@ public class PriceTedadAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     public interface ClickListener {
-        void onItemClick(int position, String az , String ta , String price);
+        void onItemClick(int position);
     }
 
 

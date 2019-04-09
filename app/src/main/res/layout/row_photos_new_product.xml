@@ -6,10 +6,20 @@
     android:padding="2dp">
 
 
+
+
+
     <ImageView
         android:id="@+id/imageview_row_photos_new_p"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+
+    <ImageView
+        android:id="@+id/imageview_close_row_photos"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/close_ic"/>
 
 
 

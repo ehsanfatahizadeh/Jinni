@@ -1,29 +1,62 @@
 package ehsanfatahizadehgmail.com.jinni;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONArray;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ehsanfatahizadehgmail.com.jinni.adapters.CategoryListAdapter;
 import ehsanfatahizadehgmail.com.jinni.adapters.ColorsAdapter;
+import ehsanfatahizadehgmail.com.jinni.adapters.PhotosProductAdapter;
+import ehsanfatahizadehgmail.com.jinni.adapters.PriceTedadAdapter;
 import ehsanfatahizadehgmail.com.jinni.adapters.PropertyAdapter;
 import ehsanfatahizadehgmail.com.jinni.adapters.SizesAdapter;
+import ehsanfatahizadehgmail.com.jinni.amounts.Constants;
+import ehsanfatahizadehgmail.com.jinni.libs.ImageOrientation;
 import ehsanfatahizadehgmail.com.jinni.models.CategoriesList;
+import ehsanfatahizadehgmail.com.jinni.models.PhotoAddress;
 import ehsanfatahizadehgmail.com.jinni.models.Products;
 import ehsanfatahizadehgmail.com.jinni.rest.ApiInterface;
 import ehsanfatahizadehgmail.com.jinni.rest.RetrofitSetting;
@@ -36,6 +69,8 @@ public class EditProductActivity extends AppCompatActivity {
     ApiInterface apis;
     RetrofitSetting retrofit;
 
+
+    List<String> list_of_photos;
 
     List<Products> list_p;
 
@@ -65,14 +100,87 @@ public class EditProductActivity extends AppCompatActivity {
 
 
 
+    CheckBox checkBox_haraji , checkBox_special;
+    EditText edt_haraji;
+
+
+    EditText edt_name_vahed , edt_gheymate_vahed , edt_vahede_farei , edt_zaribe_vahede_farei;
+
+
+    Button btn_add_prices;
+    EditText edt_az_tedad;
+    EditText edt_ta_tedad;
+    EditText edt_gheymat_tedad;
+    RecyclerView recycler_tedad;
+    PriceTedadAdapter adapter_tedad;
+
+
+
+
+    RecyclerView recycler_photos;
+    Button btn_add_photo;
+    Intent GalIntent;
+    PhotosProductAdapter adapter_photos;
+
+
+
+
+
+
+    JSONArray ja_add;
+    JSONArray ja_remove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_product);
 
+        ja_add = new JSONArray();
+        ja_remove = new JSONArray();
+
+
+        list_of_photos = new ArrayList<>();
         list_p = new ArrayList<>();
         list_p = ProductActivity.list_p;
+
+        list_of_photos = list_p.get(0).getPhotos();
+
+        edt_name_vahed = (EditText) findViewById(R.id.name_vahed_new_p_edit_p);
+        edt_gheymate_vahed = (EditText) findViewById(R.id.price_har_vahed_new_p_edit_p);
+        edt_vahede_farei = (EditText) findViewById(R.id.vahed_zarib_sefaresh_new_p_edit_p);
+        edt_zaribe_vahede_farei = (EditText) findViewById(R.id.zarib_sefaresh_new_p_edit_p);
+
+
+
+
+        edt_haraji = (EditText) findViewById(R.id.old_price_new_p_edit_p);
+        checkBox_haraji = (CheckBox) findViewById(R.id.checkbox_cheap_edit_p);
+        checkBox_special = (CheckBox) findViewById(R.id.checkbox_special_edit_p);
+
+
+        if (list_p.get(0).getHaraji().equals("no")){
+            edt_haraji.setVisibility(View.GONE);
+        }else {
+            checkBox_haraji.setChecked(true);
+            edt_haraji.setText(list_p.get(0).getHaraji());
+        }
+
+        if (list_p.get(0).getSpecial().equals("yes")){
+            checkBox_special.setChecked(true);
+        }
+
+        checkBox_haraji.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    edt_haraji.setVisibility(View.VISIBLE);
+                }else{
+                    edt_haraji.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
 
 
 
@@ -80,6 +188,51 @@ public class EditProductActivity extends AppCompatActivity {
         dialog.setMessage("لطفا کمی صبر کنید");
         retrofit = new RetrofitSetting();
         apis = retrofit.getApiInterface();
+
+
+
+
+        recycler_photos = (RecyclerView) findViewById(R.id.recycler_photos_new_p_edit_p);
+        btn_add_photo = (Button) findViewById(R.id.button_add_pictures_edit_p);
+        recycler_photos.setLayoutManager(new LinearLayoutManager(EditProductActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        adapter_photos = new PhotosProductAdapter(EditProductActivity.this);
+        recycler_photos.setAdapter(adapter_photos);
+        encoded_photos_list = new ArrayList<>();
+
+
+        btn_add_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder ab = new AlertDialog.Builder(EditProductActivity.this);
+                ab.setMessage("انتخاب عکس");
+                ab.setPositiveButton("دوربین", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        CameraOpen();
+                    }
+                });
+                ab.setNegativeButton("گالری", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        GalleryOpen();
+                    }
+                });
+                ab.show();
+            }
+        });
+
+        adapter_photos.setOnItemClickListener(new PhotosProductAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                new add_delete_photos(list_p.get(0).getMobile() , list_p.get(0).getCode() , list_of_photos.get(position)).execute();
+
+                Log.d("photo is " , "mobile="+list_p.get(0).getMobile()+"&&code="+list_p.get(0).getCode()+"&&address="+list_of_photos.get(position));
+
+            }
+        });
+
+
 
 
 
@@ -109,6 +262,50 @@ public class EditProductActivity extends AppCompatActivity {
         recycler_property.setLayoutManager(new LinearLayoutManager(EditProductActivity.this));
         adapter_property = new PropertyAdapter(EditProductActivity.this);
         recycler_property.setAdapter(adapter_property);
+
+
+
+
+
+        btn_add_prices = (Button) findViewById(R.id.button_add_row_price_table_edit_p);
+        edt_az_tedad = (EditText) findViewById(R.id.edt_new_p_az_row_edit_p);
+        edt_ta_tedad = (EditText) findViewById(R.id.edt_new_p_ta_row_edit_p);
+        edt_gheymat_tedad = (EditText) findViewById(R.id.edt_new_p_price_row_edit_p);
+        recycler_tedad = (RecyclerView) findViewById(R.id.recyclerview_big_price_edit_p);
+        recycler_tedad.setLayoutManager(new LinearLayoutManager(EditProductActivity.this));
+        adapter_tedad = new PriceTedadAdapter(EditProductActivity.this);
+        recycler_tedad.setAdapter(adapter_tedad);
+
+
+        btn_add_prices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String az = edt_az_tedad.getText().toString().trim();
+                String ta = edt_ta_tedad.getText().toString().trim();
+                String prc = edt_gheymat_tedad.getText().toString().trim();
+
+                if (!az.equals("")  && !prc.equals("")){
+
+                    if (ta.equals("")){
+                        ta = "به بالا";
+                    }
+
+                    adapter_tedad.add_row(az , ta , prc);
+
+                }
+
+
+
+            }
+        });
+
+
+        adapter_tedad.setOnItemClickListener(new PriceTedadAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                adapter_tedad.delete_row(position);
+            }
+        });
 
 
 
@@ -209,6 +406,16 @@ public class EditProductActivity extends AppCompatActivity {
 
 
 
+        edt_name_vahed.setText(list_p.get(0).getName_vahed());
+        edt_gheymate_vahed.setText(list_p.get(0).getGheymate_vahed());
+        edt_vahede_farei.setText(list_p.get(0).getVahede_zaribe_sefaresh());
+        edt_zaribe_vahede_farei.setText(list_p.get(0).getZaribe_sefaresh());
+
+
+        adapter_photos.add_list(list_of_photos);
+
+
+        adapter_tedad.add_list(list_p.get(0).getTedad_az() , list_p.get(0).getTedad_ta() , list_p.get(0).getTedad_gheymat());
 
         adapter_property.add_list(list_p.get(0).getProperty_name() , list_p.get(0).getProperty_description());
 
@@ -779,6 +986,337 @@ public class EditProductActivity extends AppCompatActivity {
 
 
 
+    Uri imageUri;
+    private void CameraOpen() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent();
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.INT_CAMERA);
+            }
+        }
+        else {
+            dispatchTakePictureIntent();
+        }
+    }
+
+    private void GalleryOpen() {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED){
+
+                GalIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(GalIntent,"Select Image from Gallery"),Constants.INT_PICK_GALLERY);
+
+            } else {
+
+                ActivityCompat.requestPermissions(EditProductActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Constants.INT_PICK_GALLERY);
+            }
+        }
+        else {
+            GalIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(Intent.createChooser(GalIntent,"Select Image from Gallery"),Constants.INT_PICK_GALLERY);
+        }
+    }
+
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == Constants.INT_CAMERA) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                dispatchTakePictureIntent();
+
+            } else {
+                Toast.makeText(EditProductActivity.this, "دسترسی داده نشد", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == Constants.INT_PICK_GALLERY) {
+
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                GalIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(GalIntent,"Select Image from Gallery"),Constants.INT_PICK_GALLERY);
+
+
+            } else {
+
+                Toast.makeText(EditProductActivity.this, "دسترسی خواندن عکس از حافظه داده نشد!!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    List<String> encoded_photos_list;
+    String encoded_image;
+    Uri final_image;
+    Uri selectedImage;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == Constants.INT_CAMERA && resultCode == RESULT_OK){
+
+
+            getContentResolver().notifyChange(selectedImage, null);
+            ContentResolver cr = getContentResolver();
+            int orientation = 0;
+            ExifInterface ei = null;
+            try {
+                ei = new ExifInterface(photoFile.getPath());
+                orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                        ExifInterface.ORIENTATION_UNDEFINED);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(cr, selectedImage);
+            } catch(Exception e) {
+                Log.e("logtagAddAdv", e.toString());
+            }
+            switch(orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    bitmap = rotateImage(bitmap, 90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    bitmap = rotateImage(bitmap, 180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    bitmap = rotateImage(bitmap, 270);
+                    break;
+                case ExifInterface.ORIENTATION_NORMAL:
+                default:
+                    bitmap = bitmap;
+            }
+
+            try{
+                Intent CropIntent;
+                CropIntent = new Intent("com.android.camera.action.CROP");
+                CropIntent.setDataAndType(getImageUri(bitmap),"image/*");
+                CropIntent.putExtra("crop","true");
+                CropIntent.putExtra("outputX",480);
+                CropIntent.putExtra("outputY",480);
+                CropIntent.putExtra("aspectX",8);
+                CropIntent.putExtra("aspectY",8);
+                CropIntent.putExtra("scaleUpIfNeeded",true);
+
+                String rndm = getRandomString();
+                File f = new File(Environment.getExternalStorageDirectory()+"/"+rndm+"/");
+                final_image = Uri.fromFile(f);
+                CropIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, final_image);
+                startActivityForResult(CropIntent, Constants.INT_CROP);
+            }
+            catch (ActivityNotFoundException anfe) {
+                String errorMessage = "Your device doesn't support the crop action!";
+                Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        }
+        else if (requestCode == Constants.INT_CROP && resultCode == RESULT_OK){
+//            adapter_photos.add_row(final_image);
+            encoded_image = getEncodedImage(final_image);
+            new add_delete_photos(list_p.get(0).getMobile() , list_p.get(0).getCode() , encoded_image).execute();
+//            encoded_photos_list.add(encoded_image);
+//            Log.d("photo is  : " , " "+encoded_image);
+        }
+        else if (requestCode == Constants.INT_PICK_GALLERY && resultCode == RESULT_OK){
+
+            try {
+                Uri filePath = data.getData();
+                //..First convert the Image to the allowable size so app do not throw Memory_Out_Bound Exception
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeStream(getContentResolver().openInputStream(filePath), null, options);
+                int resolution = 500;
+                options.inSampleSize = calculateInSampleSize(options, resolution  , resolution);
+                options.inJustDecodeBounds = false;
+                Bitmap bitmap1 = BitmapFactory.decodeStream(getContentResolver().openInputStream(filePath), null, options);
+                //...Now You have the 'bitmap' to rotate....
+                //...Rotate the bitmap to its original Orientation...
+                bitmap = ImageOrientation.modifyOrientation(getApplicationContext(),bitmap1,filePath);
+                try{
+                    Intent CropIntent;
+                    CropIntent = new Intent("com.android.camera.action.CROP");
+                    CropIntent.setDataAndType(getImageUri(bitmap),"image/*");
+                    CropIntent.putExtra("crop","true");
+                    CropIntent.putExtra("outputX",480);
+                    CropIntent.putExtra("outputY",480);
+                    CropIntent.putExtra("aspectX",8);
+                    CropIntent.putExtra("aspectY",8);
+                    CropIntent.putExtra("scaleUpIfNeeded",true);
+
+                    String rndm = getRandomString();
+                    File f = new File(Environment.getExternalStorageDirectory()+"/"+rndm+"/");
+                    final_image = Uri.fromFile(f);
+                    CropIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, final_image);
+                    startActivityForResult(CropIntent, Constants.INT_CROP);
+
+
+                }catch (ActivityNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+            } catch (Exception e) {
+                Log.d("Image_exception",e.toString());
+            }
+        }
+
+    }
+
+    public Uri getImageUri(Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    String currentPhotoPath;
+    File image;
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    File photoFile;
+    private void dispatchTakePictureIntent() {
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(EditProductActivity.this.getPackageManager()) != null) {
+            photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            if (photoFile != null) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    imageUri = FileProvider.getUriForFile(EditProductActivity.this, "ehsanfatahizadehgmail.com.jinni.fileprovider", photoFile);
+                    selectedImage = imageUri;
+                } else {
+                    imageUri = Uri.fromFile(photoFile);
+                    selectedImage = imageUri;
+                }
+                takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageUri);
+                startActivityForResult(takePictureIntent, Constants.INT_CAMERA);
+            }
+        }
+    }
+
+    Bitmap bitmap;
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
+
+
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+
+    protected String getRandomString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 10) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
+
+
+    public String getEncodedImage(Uri uri){
+        Bitmap bmp = null;
+        try {
+            bmp = MediaStore.Images.Media.getBitmap(getContentResolver() ,uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     List<CategoriesList> list = new ArrayList<CategoriesList>();
 
     public class getCategories extends AsyncTask {
@@ -847,6 +1385,77 @@ public class EditProductActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+    public class add_delete_photos extends AsyncTask {
+
+        String mobile;
+        String code;
+        String address;
+        public add_delete_photos(String mobile , String code , String address){
+            this.mobile = mobile;
+            this.code = code;
+            this.address = address;
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+
+        List<PhotoAddress> result;
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Call<List<PhotoAddress>> call = apis.delete_remove_photo(mobile , code , address);
+
+            try {
+                Response<List<PhotoAddress>> response = call.execute();
+
+                if(!response.isSuccessful()) {
+                    Toast.makeText(EditProductActivity.this, "errrror", Toast.LENGTH_SHORT).show();
+                    return null;
+                }
+                result = response.body();
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            dialog.dismiss();
+
+            if (result != null){
+
+                List<String> new_list = new ArrayList<>();
+                for (int i =0 ; i < result.size() ; i++){
+                    new_list.add(result.get(i).getAddress());
+                }
+                list_of_photos = new_list;
+                adapter_photos.add_list(new_list);
+
+            }else{
+                Toast.makeText(EditProductActivity.this, "خطای ارتباط با سرور!", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+        }
+    }
 
 
 

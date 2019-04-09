@@ -36,13 +36,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +60,7 @@ import ehsanfatahizadehgmail.com.jinni.adapters.SizesAdapter;
 import ehsanfatahizadehgmail.com.jinni.amounts.Constants;
 import ehsanfatahizadehgmail.com.jinni.libs.ImageOrientation;
 import ehsanfatahizadehgmail.com.jinni.models.CategoriesList;
+import ehsanfatahizadehgmail.com.jinni.models.PhotoAddress;
 import ehsanfatahizadehgmail.com.jinni.rest.ApiInterface;
 import ehsanfatahizadehgmail.com.jinni.rest.RetrofitSetting;
 import retrofit2.Call;
@@ -68,6 +68,15 @@ import retrofit2.Response;
 
 
 public class NewProductActivity extends AppCompatActivity {
+
+
+    String s_code;
+
+
+    RelativeLayout relativeLayout_photos;
+    TextView tw_tamam_photos;
+    List<String> list_of_photos;
+
 
     ProgressDialog dialog;
     ApiInterface apis;
@@ -152,6 +161,16 @@ public class NewProductActivity extends AppCompatActivity {
 
         encoded_photos_list = new ArrayList<>();
 
+        SharedPreferences sh = getSharedPreferences(Constants.SHARED_USER , MODE_PRIVATE);
+        mobile = sh.getString("mobile" , null);
+
+
+
+        tw_tamam_photos = (TextView) findViewById(R.id.textview_tamam_relative_photos);
+        relativeLayout_photos = (RelativeLayout) findViewById(R.id.relative_parent_photos_new_product_act);
+        list_of_photos = new ArrayList<>();
+
+
         checkBox_code = (CheckBox) findViewById(R.id.checkbox_code_new_p);
         edt_code = (EditText) findViewById(R.id.edittext_code_new_p);
 
@@ -168,6 +187,12 @@ public class NewProductActivity extends AppCompatActivity {
         });
 
 
+        tw_tamam_photos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         name_vahed = (EditText) findViewById(R.id.name_vahed_new_p);
@@ -208,6 +233,13 @@ public class NewProductActivity extends AppCompatActivity {
         adapter_photos = new PhotosProductAdapter(NewProductActivity.this);
         recycler_photos.setAdapter(adapter_photos);
 
+
+        adapter_photos.setOnItemClickListener(new PhotosProductAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                new add_delete_photos(mobile , s_code , list_of_photos.get(position)).execute();
+            }
+        });
 
         btn_add_photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -302,8 +334,7 @@ public class NewProductActivity extends AppCompatActivity {
         apis = retrofit.getApiInterface();
 
 
-        SharedPreferences sh = getSharedPreferences(Constants.SHARED_USER , MODE_PRIVATE);
-        mobile = sh.getString("mobile" , null);
+
 
 
 
@@ -1155,9 +1186,10 @@ public class NewProductActivity extends AppCompatActivity {
 
         }
         else if (requestCode == Constants.INT_CROP && resultCode == RESULT_OK){
-            adapter_photos.add_row(final_image);
+//            adapter_photos.add_row(final_image);
             encoded_image = getEncodedImage(final_image);
-            encoded_photos_list.add(encoded_image);
+            new add_delete_photos(mobile , s_code , encoded_image).execute();
+//            encoded_photos_list.add(encoded_image);
 //            Log.d("photo is  : " , " "+encoded_image);
         }
         else if (requestCode == Constants.INT_PICK_GALLERY && resultCode == RESULT_OK){
@@ -1490,18 +1522,19 @@ public class NewProductActivity extends AppCompatActivity {
             }
 
 
-            JSONArray jsonArray_photos;
-            jsonArray_photos = new JSONArray();
-            for (int i=0 ; i < encoded_photos_list.size() ; i++){
-                JSONObject jo = new JSONObject();
-                jo.put("photo" , encoded_photos_list.get(i));
-                jsonArray_photos.put(jo);
-            }
+//            JSONArray jsonArray_photos;
+//            jsonArray_photos = new JSONArray();
+//            for (int i=0 ; i < encoded_photos_list.size() ; i++){
+//                JSONObject jo = new JSONObject();
+//                jo.put("photo" , encoded_photos_list.get(i));
+//                jsonArray_photos.put(jo);
+//            }
 
 
 
             jsonObject.put("mobile",mobile);
             jsonObject.put("code",code);
+            s_code = code;
             jsonObject.put("mahiat",s_mahiat);
             jsonObject.put("jensiat",s_jensiat);
             jsonObject.put("brand",s_brand);
@@ -1520,7 +1553,7 @@ public class NewProductActivity extends AppCompatActivity {
             jsonObject.put("vahede_zaribe_se" , s_vahede_zaribe_sefaresh);
             jsonObject.put("zaribe_sefaresh" , s_zaribe_sefaresh);
             jsonObject.put("prices" , jsonArray_prices);
-            jsonObject.put("photos" , jsonArray_photos);
+//            jsonObject.put("photos" , jsonArray_photos);
 
 
             Log.d("Array is ", jsonObject.toString());
@@ -1602,8 +1635,9 @@ public class NewProductActivity extends AppCompatActivity {
             dialog.dismiss();
             if (result != null) {
                 if (result.equals("1")) {
-                    finish();
+//                    finish();
                     Toast.makeText(NewProductActivity.this, "اطلاعات با موفقیت ارسال شد.", Toast.LENGTH_SHORT).show();
+                    relativeLayout_photos.setVisibility(View.VISIBLE);
                 }
             }else {
                 Toast.makeText(NewProductActivity.this, "خطا در ارسال اطلاعات \n دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
@@ -1611,6 +1645,78 @@ public class NewProductActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+
+
+
+
+    public class add_delete_photos extends AsyncTask {
+
+        String mobile;
+        String code;
+        String address;
+        public add_delete_photos(String mobile , String code , String address){
+            this.mobile = mobile;
+            this.code = code;
+            this.address = address;
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+
+        List<PhotoAddress> result;
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Call<List<PhotoAddress>> call = apis.delete_remove_photo(mobile , code , address);
+
+            try {
+                Response<List<PhotoAddress>> response = call.execute();
+
+                if(!response.isSuccessful()) {
+                    return null;
+                }
+                result = response.body();
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            dialog.dismiss();
+
+            if (result != null){
+
+                List<String> new_list = new ArrayList<>();
+                for (int i =0 ; i < result.size() ; i++){
+                    new_list.add(result.get(i).getAddress());
+                }
+                list_of_photos = new_list;
+                adapter_photos.add_list(new_list);
+
+            }else{
+                Toast.makeText(NewProductActivity.this, "خطای ارتباط با سرور!", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+        }
+    }
 
 
 

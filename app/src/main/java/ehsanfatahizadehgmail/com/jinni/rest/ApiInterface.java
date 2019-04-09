@@ -4,6 +4,7 @@ package ehsanfatahizadehgmail.com.jinni.rest;
 import java.util.List;
 
 import ehsanfatahizadehgmail.com.jinni.models.CategoriesList;
+import ehsanfatahizadehgmail.com.jinni.models.PhotoAddress;
 import ehsanfatahizadehgmail.com.jinni.models.Products;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -63,11 +64,22 @@ public interface ApiInterface {
 
 
     @GET("products-of-category.php")
-    Call<List<Products>> getProductsOfCategory(@Query("mobile") String mobile , @Query("parent_category_id") String parent_category_id);
+    Call<List<Products>> getProductsOfCategory(@Query("mobile") String mobile ,
+                                               @Query("parent_category_id") String parent_category_id);
 
 
     @GET("product-info.php")
-    Call<List<Products>> getProduct(@Query("mobile") String mobile , @Query("product_id") String product_id );
+    Call<List<Products>> getProduct(@Query("mobile") String mobile ,
+                                    @Query("product_id") String product_id );
+
+
+    @FormUrlEncoded
+    @POST("add-remove-photo-product.php")
+    Call<List<PhotoAddress>> delete_remove_photo(@Field("mobile") String mobile ,
+                                                 @Field("code") String code ,
+                                                 @Field("address") String address);
+
+
 
 
 }

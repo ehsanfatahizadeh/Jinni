@@ -65,6 +65,8 @@ public class PropertyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if (context instanceof ProductActivity){
             holder.img_close.setVisibility(View.GONE);
+        }else{
+            holder.img_close.setVisibility(View.VISIBLE);
         }
 
 //        if (Integer.parseInt(categoriesList.getNum_of_subs()) == 0){

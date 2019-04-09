@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 import ehsanfatahizadehgmail.com.jinni.R;
@@ -17,7 +20,7 @@ import ehsanfatahizadehgmail.com.jinni.R;
 
 public class PhotosProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    public List<Uri> list_photos;
+    public List<String> list_urls;
     private Context context;
     private static ClickListener clickListener;
 
@@ -27,7 +30,7 @@ public class PhotosProductAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public PhotosProductAdapter(Context context  ){
         this.context = context;
-        list_photos = new ArrayList<Uri>();
+        list_urls = new ArrayList<String>();
 
     }
 
@@ -55,14 +58,21 @@ public class PhotosProductAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         ViewHolder holder = (ViewHolder) holderMain;
 
-        holder.img.setImageURI(list_photos.get(position));
+
+
+        Glide.with(context).load("http://beh-navaz.ir/jinni-api/" + list_urls.get(position))
+                .centerCrop()
+                .into(holder.img);
+
+
+
 
 
     }
 
     @Override
     public int getItemCount() {
-        return list_photos.size();
+        return list_urls.size();
     }
 
 
@@ -70,31 +80,36 @@ public class PhotosProductAdapter extends RecyclerView.Adapter<RecyclerView.View
     private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView img;
+        ImageView img_close;
+
         ViewHolder(View itemView) {
             super(itemView);
 
             img = (ImageView) itemView.findViewById(R.id.imageview_row_photos_new_p);
+            img_close = (ImageView) itemView.findViewById(R.id.imageview_close_row_photos);
 
-
-            itemView.setOnClickListener(this);
+            img_close.setOnClickListener(this);
 
         }
 
 
         @Override
         public void onClick(View v) {
-//            clickListener.onItemClick(getAdapterPosition(), list_properties.get(getAdapterPosition()) , list_descrip.get(getAdapterPosition()));
+            clickListener.onItemClick(getAdapterPosition());
         }
 
     }
 
 
-    public void add_row (Uri uri ){
-        this.list_photos.add(uri);
+    public void add_list (List<String> urls ){
+        list_urls = urls;
         notifyDataSetChanged();
     }
 
-    public void delete_row (String new_properties ,String new_descrip){
+
+
+    public void delete_row_url (int position){
+        list_urls.remove(position);
         notifyDataSetChanged();
     }
 
@@ -105,9 +120,8 @@ public class PhotosProductAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
 
-
     public interface ClickListener {
-        void onItemClick(int position, Uri uri);
+        void onItemClick(int position);
     }
 
 

@@ -338,7 +338,7 @@ public class TellActivity extends BaseActivity {
                 Response<String> response = call.execute();
 
                 if(!response.isSuccessful()) {
-                    Toast.makeText(TellActivity.this, "errrror2", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(TellActivity.this, "errrror2", Toast.LENGTH_SHORT).show();
                     return null;
                 }
                 result_code = response.body();
