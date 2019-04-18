@@ -4,6 +4,8 @@ package ehsanfatahizadehgmail.com.jinni.rest;
 import java.util.List;
 
 import ehsanfatahizadehgmail.com.jinni.models.CategoriesList;
+import ehsanfatahizadehgmail.com.jinni.models.CheckGet;
+import ehsanfatahizadehgmail.com.jinni.models.CheckGive;
 import ehsanfatahizadehgmail.com.jinni.models.PhotoAddress;
 import ehsanfatahizadehgmail.com.jinni.models.Products;
 import retrofit2.Call;
@@ -78,6 +80,47 @@ public interface ApiInterface {
     Call<List<PhotoAddress>> delete_remove_photo(@Field("mobile") String mobile ,
                                                  @Field("code") String code ,
                                                  @Field("address") String address);
+
+
+    @FormUrlEncoded
+    @POST("edit-product.php")
+    Call<String> sendEditProduct(@Field("json_edit_p") String json_new_p);
+
+
+    @FormUrlEncoded
+    @POST("new-check-get.php")
+    Call<String> sendCheckGet(@Field("mobile") String mobile,
+                              @Field("tavasote") String tavasote,
+                              @Field("shomare_check") String shomare_check,
+                              @Field("gheymat") String gheymat,
+                              @Field("tozihat") String tozihat,
+                              @Field("vaziat") String vaziat,
+                              @Field("year") String year,
+                              @Field("month") String month,
+                              @Field("day") String day);
+
+
+    @GET("checks-get.php")
+    Call<List<CheckGet>> getCheckGet(@Query("mobile") String mobile);
+
+
+    @FormUrlEncoded
+    @POST("new-check-give.php")
+    Call<String> sendCheckGive(@Field("mobile") String mobile,
+                              @Field("dar_vajhe") String dar_vajhe,
+                              @Field("az_hesabe") String az_hesabe,
+                              @Field("name_bank") String name_bank,
+                              @Field("shomare_check") String shomare_check,
+                              @Field("mablagh") String mablagh,
+                              @Field("tozihat") String tozihat,
+                              @Field("vaziat") String vaziat,
+                              @Field("year") String year,
+                              @Field("month") String month,
+                              @Field("day") String day);
+
+
+    @GET("checks-give.php")
+    Call<List<CheckGive>> getCheckGive(@Query("mobile") String mobile);
 
 
 

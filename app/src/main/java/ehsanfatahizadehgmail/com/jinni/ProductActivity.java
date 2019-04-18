@@ -267,7 +267,7 @@ public class ProductActivity extends AppCompatActivity {
             dialog.dismiss();
             if (result != null) {
 
-                Toast.makeText(ProductActivity.this, result.get(0).getMahiat_titr(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ProductActivity.this, result.get(0).getMahiat_titr(), Toast.LENGTH_SHORT).show();
                 urls = new ArrayList<>();
                 urls = result.get(0).getPhotos();
                 pager.setAdapter(pagerAdapter);

@@ -250,7 +250,6 @@ public class TellActivity extends BaseActivity {
                 Response<String> response = call.execute();
 
                 if(!response.isSuccessful()) {
-                    Toast.makeText(TellActivity.this, "errrror", Toast.LENGTH_SHORT).show();
                     return null;
                 }
                 result = response.body();
@@ -338,7 +337,7 @@ public class TellActivity extends BaseActivity {
                 Response<String> response = call.execute();
 
                 if(!response.isSuccessful()) {
-//                    Toast.makeText(TellActivity.this, "errrror2", Toast.LENGTH_SHORT).show();
+
                     return null;
                 }
                 result_code = response.body();
@@ -349,6 +348,10 @@ public class TellActivity extends BaseActivity {
 
             return null;
         }
+
+
+
+
 
         @Override
         protected void onPostExecute(Object o) {

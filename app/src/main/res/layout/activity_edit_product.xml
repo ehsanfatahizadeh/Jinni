@@ -431,28 +431,6 @@
             </LinearLayout>
 
 
-
-
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_photos_new_p_edit_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </android.support.v7.widget.RecyclerView>
-
-
-
-            <Button
-                android:id="@+id/button_add_pictures_edit_p"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="اضافه کردن عکس"
-                android:background="@color/colorPrimary"
-                android:textColor="#fff"/>
-
-
-
             <Button
                 android:id="@+id/button_new_p_final_sabt_edit_p"
                 android:layout_width="match_parent"
@@ -471,6 +449,97 @@
 
 
     </ScrollView>
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/relative_parent_photos_edit_product_act"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/my_white">
+
+
+
+            <RelativeLayout
+                android:id="@+id/relative_photos_edit_action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimaryDark">
+
+
+                <TextView
+                    android:id="@+id/textview_tamam_edit_relative_photos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:text="تمام"
+                    android:textColor="@color/my_white"
+                    android:layout_marginRight="5dp"/>
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relative_photos_edit_action_bar">
+
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_photos_new_p_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/button_add_pictures"
+                    >
+
+                </android.support.v7.widget.RecyclerView>
+
+
+
+                <Button
+                    android:id="@+id/button_add_pictures_edit_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/colorAccent"
+                    android:text="انتخاب عکس+ "
+                    android:textColor="@color/my_white"
+                    android:textSize="16dp"
+                    android:layout_alignParentBottom="true" />
+
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
 
 
 

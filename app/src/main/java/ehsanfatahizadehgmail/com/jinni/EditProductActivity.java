@@ -33,10 +33,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -78,7 +81,7 @@ public class EditProductActivity extends AppCompatActivity {
     EditText edt_code , edt_mahiat , edt_jensiat , edt_brand , edt_model , edt_vizhegi_titr , edt_size_titr , edt_tozihat;
 
 
-    List<String> final_color_list;
+
     TextView tw_colors;
     ColorsAdapter adapter;
 
@@ -124,11 +127,18 @@ public class EditProductActivity extends AppCompatActivity {
 
 
 
+    RelativeLayout relativeLayout_photos;
+
+
+    TextView tw_tamam;
 
 
 
     JSONArray ja_add;
     JSONArray ja_remove;
+
+
+    Button btn_sabt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +154,26 @@ public class EditProductActivity extends AppCompatActivity {
         list_p = ProductActivity.list_p;
 
         list_of_photos = list_p.get(0).getPhotos();
+
+        tw_tamam = (TextView) findViewById(R.id.textview_tamam_edit_relative_photos);
+
+        relativeLayout_photos = (RelativeLayout) findViewById(R.id.relative_parent_photos_edit_product_act);
+
+        btn_sabt = (Button) findViewById(R.id.button_new_p_final_sabt_edit_p);
+
+        btn_sabt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Validate();
+            }
+        });
+
+        tw_tamam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         edt_name_vahed = (EditText) findViewById(R.id.name_vahed_new_p_edit_p);
         edt_gheymate_vahed = (EditText) findViewById(R.id.price_har_vahed_new_p_edit_p);
@@ -225,7 +255,7 @@ public class EditProductActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
-                new add_delete_photos(list_p.get(0).getMobile() , list_p.get(0).getCode() , list_of_photos.get(position)).execute();
+                new add_delete_photos(list_p.get(0).getMobile() , s_code , list_of_photos.get(position)).execute();
 
                 Log.d("photo is " , "mobile="+list_p.get(0).getMobile()+"&&code="+list_p.get(0).getCode()+"&&address="+list_of_photos.get(position));
 
@@ -1124,7 +1154,7 @@ public class EditProductActivity extends AppCompatActivity {
         else if (requestCode == Constants.INT_CROP && resultCode == RESULT_OK){
 //            adapter_photos.add_row(final_image);
             encoded_image = getEncodedImage(final_image);
-            new add_delete_photos(list_p.get(0).getMobile() , list_p.get(0).getCode() , encoded_image).execute();
+            new add_delete_photos(list_p.get(0).getMobile() , s_code , encoded_image).execute();
 //            encoded_photos_list.add(encoded_image);
 //            Log.d("photo is  : " , " "+encoded_image);
         }
@@ -1456,6 +1486,314 @@ public class EditProductActivity extends AppCompatActivity {
 
         }
     }
+
+
+
+
+
+
+
+    public class thread_send_edit_product extends AsyncTask {
+
+
+        String json_new_p;
+
+        public thread_send_edit_product(String json_new_p){
+            this.json_new_p = json_new_p;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+
+        String result;
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Call<String> call = apis.sendEditProduct(json_new_p);
+
+            try {
+                Response<String> response = call.execute();
+
+                if(!response.isSuccessful()) {
+                    Toast.makeText(EditProductActivity.this, "errrror", Toast.LENGTH_SHORT).show();
+                    return null;
+                }
+                result = response.body();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            dialog.dismiss();
+            if (result != null) {
+                if (result.equals("1")) {
+                    Toast.makeText(EditProductActivity.this, "اطلاعات با موفقیت ارسال شد.", Toast.LENGTH_SHORT).show();
+                    relativeLayout_photos.setVisibility(View.VISIBLE);
+                }
+            }else {
+                Toast.makeText(EditProductActivity.this, "خطا در ارسال اطلاعات \n دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    List<String> final_color_list;
+    List<String> final_sizes_list;
+    List<String> final_descrip_list;
+    List<String> final_properties_list;
+    List<String> final_tedad_az_lis;
+    List<String> final_tedad_ta_list;
+    List<String> final_tedad_price_list;
+
+
+    String s_code;
+    void Validate(){
+
+
+
+
+        s_code = edt_code.getText().toString().trim();
+        if (s_code.equals("")){
+
+            String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder salt = new StringBuilder();
+            Random rnd = new Random();
+            while (salt.length() < 10) { // length of the random string.
+                int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+                salt.append(SALTCHARS.charAt(index));
+            }
+            s_code = salt.toString();
+        }
+
+
+        String s_mahiat = edt_mahiat.getText().toString().trim();
+        String s_jensiat = edt_jensiat.getText().toString().trim();
+        String s_brand = edt_brand.getText().toString().trim();
+        String s_model = edt_model.getText().toString().trim();
+        String s_special_property = edt_vizhegi_titr.getText().toString().trim();
+        String s_size_titr = edt_size_titr.getText().toString().trim();
+
+
+        final_color_list = adapter.colors;
+        final_sizes_list = adapter_size.sizes;
+
+
+        String s_category = tw_choose_category.getText().toString();
+        String s_description = edt_tozihat.getText().toString().trim();
+
+
+        final_descrip_list = adapter_property.list_descrip;
+        final_properties_list = adapter_property.list_properties;
+
+
+        String s_haraji;
+        String s_special;
+        if (checkBox_haraji.isChecked()){
+            s_haraji = edt_haraji.getText().toString().trim();
+        }else{
+            s_haraji = "no";
+        }
+        if (checkBox_special.isChecked()){
+            s_special = "yes";
+        }else{
+            s_special = "no";
+        }
+
+        String s_name_vahed = edt_name_vahed.getText().toString().trim();
+        String s_gheymate_vahed = edt_gheymate_vahed.getText().toString().trim();
+        String s_vahede_zaribe_sefaresh = edt_vahede_farei.getText().toString().trim();
+        String s_zaribe_sefaresh = edt_zaribe_vahede_farei.getText().toString().trim();
+
+
+        final_tedad_az_lis = adapter_tedad.list_az;
+        final_tedad_ta_list = adapter_tedad.list_ta;
+        final_tedad_price_list = adapter_tedad.list_price;
+
+
+//        encoded_photos_list;
+
+//        if (s_mahiat.equals("")){
+//            s_mahiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_brand.equals("")){
+//            s_brand = "nothing";
+//        }else if (s_model.equals("")){
+//            s_model = "nothing";
+//        }else if (s_special_property.equals("")){
+//            s_special_property = "nothing";
+//        }else if (s_size_titr.equals("")){
+//            s_size_titr = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }else if (s_jensiat.equals("")){
+//            s_jensiat = "nothing";
+//        }
+
+
+
+
+
+
+
+
+//        Log.d("s_mahiat" , s_mahiat);
+//        Log.d("s_jensiat" ,s_jensiat );
+//        Log.d("s_brand" ,s_brand );
+//        Log.d("s_model" , s_model);
+//        Log.d("s_special_property" , s_special_property);
+//        Log.d("s_size_titr" , s_size_titr);
+//
+//        Log.d("final_color_list" , final_color_list.toString());
+//        Log.d("final_sizes_list" ,final_sizes_list.toString() );
+//
+//        Log.d("s_category" , s_category);
+//        Log.d("s_description" ,s_description );
+//
+//        Log.d("final_descrip_list" , final_descrip_list.toString());
+//        Log.d("final_properties_list" , final_properties_list.toString());
+//
+//        Log.d("s_haraji" , s_haraji);
+//        Log.d("s_special" , s_special);
+//
+//        Log.d("s_name_vahed" , s_name_vahed);
+//        Log.d("s_gheymate_vahed" ,s_gheymate_vahed );
+//        Log.d("s_vahede_zaribe_se" ,s_vahede_zaribe_sefaresh );
+//        Log.d("s_zaribe_sefaresh" ,s_zaribe_sefaresh );
+//
+//        Log.d("final_tedad_az_lis" ,final_tedad_az_lis.toString() );
+//        Log.d("final_tedad_ta_list" , final_tedad_ta_list.toString());
+//        Log.d("final_tedad_price_list" , final_tedad_price_list.toString());
+//        Log.d("encoded_photos_list" , encoded_photos_list.toString());
+
+
+
+        JSONObject jsonObject = new JSONObject();
+        JSONArray jsonArray_colors;
+        try {
+
+            jsonArray_colors = new JSONArray();
+            for (int i=0 ; i < final_color_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("name" , final_color_list.get(i));
+                jsonArray_colors.put(jo);
+            }
+
+
+            JSONArray jsonArray_sizes;
+            jsonArray_sizes = new JSONArray();
+            for (int i=0 ; i < final_sizes_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("name" , final_sizes_list.get(i));
+                jsonArray_sizes.put(jo);
+            }
+
+
+
+            JSONArray jsonArray_property;
+            jsonArray_property = new JSONArray();
+            for (int i=0 ; i < final_properties_list.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("name" , final_properties_list.get(i));
+                jo.put("description" , final_descrip_list.get(i));
+                jsonArray_property.put(jo);
+            }
+
+
+
+            JSONArray jsonArray_prices;
+            jsonArray_prices = new JSONArray();
+            for (int i=0 ; i < final_tedad_az_lis.size() ; i++){
+                JSONObject jo = new JSONObject();
+                jo.put("az" , final_tedad_az_lis.get(i));
+                jo.put("ta" , final_tedad_ta_list.get(i));
+                jo.put("price" , final_tedad_price_list.get(i));
+                jsonArray_prices.put(jo);
+            }
+
+
+//            JSONArray jsonArray_photos;
+//            jsonArray_photos = new JSONArray();
+//            for (int i=0 ; i < encoded_photos_list.size() ; i++){
+//                JSONObject jo = new JSONObject();
+//                jo.put("photo" , encoded_photos_list.get(i));
+//                jsonArray_photos.put(jo);
+//            }
+
+
+
+            jsonObject.put("mobile",list_p.get(0).getMobile());
+            jsonObject.put("last_code",list_p.get(0).getCode());
+            jsonObject.put("code",s_code);
+            jsonObject.put("mahiat",s_mahiat);
+            jsonObject.put("jensiat",s_jensiat);
+            jsonObject.put("brand",s_brand);
+            jsonObject.put("model",s_model);
+            jsonObject.put("special_property",s_special_property);
+            jsonObject.put("size_titr",s_size_titr);
+            jsonObject.put("colors" , jsonArray_colors);
+            jsonObject.put("sizes" , jsonArray_sizes);
+            jsonObject.put("category" , s_category);
+            jsonObject.put("description" , s_description);
+            jsonObject.put("properties" , jsonArray_property);
+            jsonObject.put("haraji" , s_haraji);
+            jsonObject.put("special" , s_special);
+            jsonObject.put("name_vahed" , s_name_vahed);
+            jsonObject.put("gheymate_vahed" , s_gheymate_vahed);
+            jsonObject.put("vahede_zaribe_se" , s_vahede_zaribe_sefaresh);
+            jsonObject.put("zaribe_sefaresh" , s_zaribe_sefaresh);
+            jsonObject.put("prices" , jsonArray_prices);
+//            jsonObject.put("photos" , jsonArray_photos);
+
+
+            Log.d("Array is ", jsonObject.toString());
+
+
+
+
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        new thread_send_edit_product(jsonObject.toString()).execute();
+
+
+
+
+
+    }
+
+
+
+
 
 
 

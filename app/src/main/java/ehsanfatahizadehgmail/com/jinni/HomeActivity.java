@@ -47,6 +47,9 @@ public class HomeActivity extends BaseActivity {
     ProgressDialog dialog;
 
 
+    TextView manage_checks;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,15 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
 
 
+        manage_checks = (TextView) findViewById(R.id.textview_modiriat_checkha);
+
+
+        manage_checks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this , ChecksActivity.class));
+            }
+        });
 
         recyclerView_categories = (RecyclerView) findViewById(R.id.recycler_home_categories);
         adapter_categories = new CategoriesHomeAdapter(HomeActivity.this);

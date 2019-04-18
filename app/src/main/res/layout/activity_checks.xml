@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChecksActivity">
+
+
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs_checks"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:tabIndicatorColor="#b5a512"
+        app:tabIndicatorHeight="4dp"
+        android:background="@color/colorPrimaryDark"
+        style="@style/MyTabLayout"
+        android:layout_below="@+id/recycler_home_categories"></android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_checks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tabs_checks"/>
+
+
+
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_new_give_check"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="25dp"
+        app:srcCompat="@drawable/ic_give_check"
+        app:fabCustomSize="50dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_new_get_check"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="25dp"
+        app:srcCompat="@drawable/ic_get_check"
+        app:fabCustomSize="50dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        app:srcCompat="@drawable/ic_add_pluse"
+        app:fabCustomSize="70dp"
+        tools:ignore="VectorDrawableCompat" />
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/checks_new_get"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/my_white"
+        android:visibility="gone"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relative_action_bar_new_check_get"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimaryDark">
+
+
+                <ImageView
+                    android:id="@+id/imageview_back_new_check_get"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_action_arrow_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/textview_back_frame_get_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="برگشت"
+                    android:gravity="center_vertical|right"
+                    android:layout_toLeftOf="@+id/imageview_back_new_check_get"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/my_white"
+                    />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relative_action_bar_new_check_get">
+
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+
+                        <EditText
+                            android:id="@+id/edittext_whos_check_new_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:hint="پرداخت توسط"
+                            android:gravity="center_vertical|right"
+                            android:textColor="#000000"/>
+
+
+                        <TextView
+                            android:id="@+id/textview_vaziate_check_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorAccent"
+                            android:gravity="center"
+                            android:textColor="@color/my_white"
+                            android:text="وضعیت چک"/>
+
+
+                        <EditText
+                            android:id="@+id/edittext_shomare_check_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:hint="شماره چک"
+                            android:gravity="center_vertical|right"
+                            android:textColor="#000000"/>
+
+
+                        <EditText
+                            android:id="@+id/edittext_price_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:hint="مبلغ"
+                            android:gravity="center_vertical|right"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:id="@+id/textview_tarikh_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/colorAccent"
+                            android:gravity="center"
+                            android:textColor="@color/my_white"
+                            android:text="تاریخ رسید چک"/>
+
+                        <EditText
+                            android:id="@+id/edittext_tozihat_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_margin="5dp"
+                            android:hint="توضیحات"
+                            android:gravity="center_vertical|right"
+                            android:textColor="#000000"/>
+
+
+                        <Button
+                            android:id="@+id/button_sabt_get_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@color/colorAccent"
+                            android:layout_margin="5dp"
+                            android:gravity="center"
+                            android:textColor="@color/my_white"
+                            android:text="ثبت"/>
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+    </FrameLayout>
+
+
+
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/checks_new_give"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/my_white"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relative_action_bar_new_check_give"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimaryDark">
+
+
+                <ImageView
+                    android:id="@+id/imageview_back_new_check_give"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_action_arrow_right"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/textview_back_frame_give_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="برگشت"
+                    android:gravity="center_vertical|right"
+                    android:layout_toLeftOf="@+id/imageview_back_new_check_give"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/my_white"
+                    />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_parent_of_scroll_give_check"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relative_action_bar_new_check_give">
+
+
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/edittext_check_give_dar_vajhe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="در وجه"
+                            />
+
+                        <EditText
+                            android:id="@+id/edittext_check_give_az_hesabe"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="از حساب"/>
+
+                        <EditText
+                            android:id="@+id/edittext_check_give_name_bank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="نام بانک"/>
+
+                        <TextView
+                            android:id="@+id/textview_check_give_vaziate_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@color/colorAccent"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/my_white"
+                            android:text="وضعیت چک"
+                            android:gravity="center"/>
+
+                        <EditText
+                            android:id="@+id/edittext_check_give_shomare_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="شماره چک"/>
+
+                        <EditText
+                            android:id="@+id/edittext_check_give_mablagh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="مبلغ"/>
+
+                        <TextView
+                            android:id="@+id/textview_check_give_tarikhe_reside_check"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@color/colorAccent"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/my_white"
+                            android:text="تاریخ رسید چک"
+                            android:gravity="center"/>
+
+                        <EditText
+                            android:id="@+id/edittext_check_give_tozihat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="توضیجات"/>
+
+                        <TextView
+                            android:id="@+id/textview_check_give_tarikhe_sabt"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@color/colorAccent"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/my_white"
+                            android:text="ثبت"
+                            android:gravity="center"/>
+
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -177,13 +177,14 @@
                     android:layout_marginLeft="20dp"/>
 
                 <TextView
+                    android:id="@+id/textview_modiriat_checkha"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center_vertical|right"
                     android:paddingRight="20dp"
-                    android:text="شماره 4"
+                    android:text="مدیریت چک ها"
                     android:textColor="@color/my_white"
-                    android:textSize="16dp"/>
+                    android:textSize="16dp" />
 
                 <View
                     android:layout_width="match_parent"

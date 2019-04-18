@@ -17,6 +17,7 @@ public class Constants {
     public static int INT_CROP = 2;
     public static int INT_AFTER_CROP = 3;
 
+
     public static String cities = loadJSONCitiesFromAsset();
 
 

@@ -7,4 +7,6 @@
     <color name="my_white">#fffbfe</color>
     <color name="background1spinner">#eeeeee</color>
     <color name="background2spinner">#cccccc</color>
+    <color name="mdtp_accent_color">#009688</color>
+    <color name="mdtp_accent_color_dark">#00796b</color>
 </resources>
