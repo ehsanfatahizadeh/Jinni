@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical">
+
+
+    <RadioGroup
+        android:id="@+id/radio_button_group_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+
+
+        <RadioButton
+            android:id="@+id/radio_button_get_check_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="چک دریافتی"/>
+
+        <RadioButton
+            android:id="@+id/radio_button_give_check_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="چک پرداختی"/>
+
+
+
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/edittext_search_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="پرداخت توسط"/>
+
+    <EditText
+        android:id="@+id/edittext_search_shomare_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="شماره چک"/>
+
+
+    <CheckBox
+        android:id="@+id/checkbox_price_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="بازه مبلغ"/>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linear_search_check_mablagh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <EditText
+            android:id="@+id/edittext_search_price_az"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="از مبلغ"/>
+
+        <EditText
+            android:id="@+id/edittext_search_price_ta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="تا مبلغ"/>
+
+
+    </LinearLayout>
+
+
+
+
+    <CheckBox
+        android:id="@+id/checkbox_date_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="بازه زمانی"
+        android:layout_marginTop="10dp"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear_search_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="سال"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="ماه"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="روز"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=" "
+                android:gravity="center"
+                android:layout_weight="1.1"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_az_sal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_az_mah"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_az_ruz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="از تاریخ : "
+                android:gravity="center"
+                android:layout_weight="1.1"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="سال"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="ماه"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="روز"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=" "
+                android:gravity="center"
+                android:layout_weight="1.1"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_ta_sal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_ta_mah"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_search_ta_ruz"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="تا تاریخ : "
+                android:gravity="center"
+                android:layout_weight="1.1"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+
+
+        <Spinner
+            android:id="@+id/spinner_search_vaziat_check"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"></Spinner>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="وضعیت چک : "
+            android:layout_weight="1.9"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+    <Button
+        android:id="@+id/button_search_sabt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="جستجو"
+        android:background="@color/colorAccent"
+        android:textColor="@color/my_white"
+        android:layout_margin="10dp"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

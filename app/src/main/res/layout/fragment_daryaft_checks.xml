@@ -6,18 +6,13 @@
 
 
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/searchview_daryaft_check"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:queryHint="جستجو"></android.support.v7.widget.SearchView>
+
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_daryaft_check"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchview_daryaft_check"
         ></android.support.v7.widget.RecyclerView>
 
 

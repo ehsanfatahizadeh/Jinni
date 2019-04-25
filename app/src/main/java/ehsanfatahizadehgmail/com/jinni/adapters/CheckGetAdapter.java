@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class CheckGetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ViewHolder holder = (ViewHolder) holderMain;
         holder.txt_tavasote.setText(list.get(position).getTavasote());
         holder.txt_mablagh.setText(list.get(position).getGheymat());
-        holder.txt_tarikh.setText(list.get(position).getDate_shamsi());
+        holder.txt_tarikh.setText(list.get(position).getYear_shamsi()+"/"+list.get(position).getMonth_shamsi()+"/"+list.get(position).getDay_shamsi());
         holder.txt_vaziat.setText(list.get(position).getVaziat());
         holder.txt_tozihat.setText(list.get(position).getTozihat());
 
@@ -80,6 +81,7 @@ public class CheckGetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView txt_tarikh;
         TextView txt_vaziat;
         TextView txt_tozihat;
+        ImageView img_remove;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -90,10 +92,11 @@ public class CheckGetAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             txt_tarikh = (TextView) itemView.findViewById(R.id.textview_tarikh_row_check_get);
             txt_vaziat = (TextView) itemView.findViewById(R.id.textview_vaziat_row_check_get);
             txt_tozihat = (TextView) itemView.findViewById(R.id.textview_tozihat_row_check_get);
+            img_remove= (ImageView) itemView.findViewById(R.id.imageview_remove_row_check_get);
 
 
 
-//            itemView.setOnClickListener(this);
+            img_remove.setOnClickListener(this);
 
 
 

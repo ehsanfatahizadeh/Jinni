@@ -45,10 +45,17 @@ public class CheckGet {
     @Expose
     public String day;
 
-    @SerializedName("date_shamsi")
+    @SerializedName("year_shamsi")
     @Expose
-    public String date_shamsi;
+    public String year_shamsi;
 
+    @SerializedName("month_shamsi")
+    @Expose
+    public String month_shamsi;
+
+    @SerializedName("day_shamsi")
+    @Expose
+    public String day_shamsi;
 
 
 
@@ -93,8 +100,16 @@ public class CheckGet {
         return day;
     }
 
-    public String getDate_shamsi() {
-        return date_shamsi;
+    public String getYear_shamsi() {
+        return year_shamsi;
+    }
+
+    public String getMonth_shamsi() {
+        return month_shamsi;
+    }
+
+    public String getDay_shamsi() {
+        return day_shamsi;
     }
 
 

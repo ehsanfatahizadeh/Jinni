@@ -23,6 +23,15 @@
                 android:layout_height="wrap_content">
 
 
+                <ImageView
+                    android:id="@+id/imageview_remove_row_check_give"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/close_ic"
+                    android:layout_marginLeft="10dp"/>
+
+
+
                 <TextView
                     android:id="@+id/textview_dar_vajhe_row_check_give"
                     android:layout_width="wrap_content"

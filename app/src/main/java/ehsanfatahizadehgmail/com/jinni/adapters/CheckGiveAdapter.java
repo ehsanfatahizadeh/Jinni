@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class CheckGiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ViewHolder holder = (ViewHolder) holderMain;
         holder.txt_dar_vajhe.setText(list.get(position).getDar_vajhe());
         holder.txt_mablagh.setText(list.get(position).getMablagh());
-        holder.txt_tarikh.setText(list.get(position).getDate_shamsi());
+        holder.txt_tarikh.setText(list.get(position).getYear_shamsi()+"/"+list.get(position).getMonth_shamsi()+"/"+list.get(position).getDay_shamsi());
         holder.txt_vaziat.setText(list.get(position).getVaziat());
         holder.txt_az_hesabe.setText(list.get(position).getAz_hesabe());
         holder.txt_name_bank.setText(list.get(position).getName_bank());
@@ -87,6 +88,7 @@ public class CheckGiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView txt_name_bank;
         TextView txt_shomare_check;
         TextView txt_tozihat;
+        ImageView img_remove;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -100,10 +102,10 @@ public class CheckGiveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             txt_name_bank = (TextView) itemView.findViewById(R.id.name_bank_row_check_give);
             txt_shomare_check = (TextView) itemView.findViewById(R.id.shomare_check_row_check_give);
             txt_tozihat = (TextView) itemView.findViewById(R.id.tozihat_row_check_give);
+            img_remove= (ImageView) itemView.findViewById(R.id.imageview_remove_row_check_give);
 
 
-
-//            itemView.setOnClickListener(this);
+            img_remove.setOnClickListener(this);
 
 
 

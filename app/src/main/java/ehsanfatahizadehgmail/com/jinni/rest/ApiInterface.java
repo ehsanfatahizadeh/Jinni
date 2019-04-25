@@ -123,6 +123,47 @@ public interface ApiInterface {
     Call<List<CheckGive>> getCheckGive(@Query("mobile") String mobile);
 
 
+    @GET("search-checks-get.php")
+    Call<List<CheckGet>> searchInChecksGet(@Query("mobile") String mobile,
+                                        @Query("g_y_az") String g_y_az,
+                                        @Query("g_m_az") String g_m_az,
+                                        @Query("g_d_az") String g_d_az,
+                                        @Query("g_y_ta") String g_y_ta,
+                                        @Query("g_m_ta") String g_m_ta,
+                                        @Query("g_d_ta") String g_d_ta,
+                                        @Query("customer_name") String customer_name,
+                                        @Query("number_check") String number_check,
+                                        @Query("vaziat_check") String vaziat_check,
+                                        @Query("mablagh_az") String mablagh_az,
+                                        @Query("mablagh_ta") String mablagh_ta);
+
+    @GET("search-checks-give.php")
+    Call<List<CheckGive>> searchInChecksGive(@Query("mobile") String mobile,
+                                            @Query("g_y_az") String g_y_az,
+                                            @Query("g_m_az") String g_m_az,
+                                            @Query("g_d_az") String g_d_az,
+                                            @Query("g_y_ta") String g_y_ta,
+                                            @Query("g_m_ta") String g_m_ta,
+                                            @Query("g_d_ta") String g_d_ta,
+                                            @Query("customer_name") String customer_name,
+                                            @Query("number_check") String number_check,
+                                            @Query("vaziat_check") String vaziat_check,
+                                            @Query("mablagh_az") String mablagh_az,
+                                            @Query("mablagh_ta") String mablagh_ta);
+
+
+    @FormUrlEncoded
+    @POST("delete-check.php")
+    Call<List<CheckGet>> deleteCheckGet(@Field("mobile") String mobile ,
+                             @Field("check_id") String check_id ,
+                             @Field("type") String type);
+
+
+    @FormUrlEncoded
+    @POST("delete-check.php")
+    Call<List<CheckGive>> deleteCheckGive(@Field("mobile") String mobile ,
+                                        @Field("check_id") String check_id ,
+                                        @Field("type") String type);
 
 
 }

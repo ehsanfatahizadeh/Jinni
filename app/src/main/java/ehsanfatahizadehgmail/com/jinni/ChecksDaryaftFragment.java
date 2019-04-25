@@ -1,6 +1,9 @@
 package ehsanfatahizadehgmail.com.jinni;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +23,7 @@ import java.util.List;
 
 import ehsanfatahizadehgmail.com.jinni.adapters.CheckGetAdapter;
 import ehsanfatahizadehgmail.com.jinni.amounts.Constants;
+import ehsanfatahizadehgmail.com.jinni.db.CheckGetDbHelper;
 import ehsanfatahizadehgmail.com.jinni.models.CheckGet;
 import ehsanfatahizadehgmail.com.jinni.rest.ApiInterface;
 import ehsanfatahizadehgmail.com.jinni.rest.RetrofitSetting;
@@ -40,7 +44,7 @@ public class ChecksDaryaftFragment extends Fragment {
 
 
     RecyclerView recyclerView;
-    CheckGetAdapter adapter_check_get;
+    public static CheckGetAdapter adapter_check_get;
 
 
 
@@ -85,6 +89,28 @@ public class ChecksDaryaftFragment extends Fragment {
                 }
 
 
+
+            }
+        });
+
+
+        adapter_check_get.setOnItemClickListener(new CheckGetAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, final CheckGet checkGet) {
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("حذف چک")
+                        .setMessage("آیا از حذف چک اطمینان دارید؟")
+                        .setPositiveButton("بله", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                new thread_delete_check_get(checkGet.getMobile() , checkGet.getId()).execute();
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton("خیر", null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
 
             }
         });
@@ -152,7 +178,7 @@ public class ChecksDaryaftFragment extends Fragment {
 
                     adapter_check_get.add_list(result);
 
-//                    Constants.REFRESH_CHECKS = true;
+                    check_db(result);
 
 
                 }
@@ -161,6 +187,148 @@ public class ChecksDaryaftFragment extends Fragment {
             }
         }
     }
+
+
+
+
+
+
+
+    public class thread_delete_check_get extends AsyncTask {
+
+        String mobile;
+        String check_id;
+        public thread_delete_check_get(String mobile , String check_id){
+            this.mobile = mobile;
+            this.check_id = check_id;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.show();
+        }
+
+
+        List<CheckGet> result;
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            Call<List<CheckGet>> call = apis.deleteCheckGet(mobile , check_id , "1");
+
+            try {
+                Response<List<CheckGet>> response = call.execute();
+
+                if(!response.isSuccessful()) {
+                    return null;
+                }
+                result = response.body();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+
+            dialog.dismiss();
+
+            if (result != null) {
+
+                Toast.makeText(getActivity(), "با موفقیت حذف شد", Toast.LENGTH_SHORT).show();
+                adapter_check_get.add_list(result);
+                check_db_delete(check_id);
+
+
+            }else {
+                Toast.makeText(getActivity(), "مشکل در ارتباط با سرور \n دوباره امتحان کنید", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
+
+
+
+    public void check_db(List<CheckGet> list_cg){
+        CheckGetDbHelper db = new CheckGetDbHelper(getActivity());
+
+
+
+
+
+
+        for (int i=0 ; i < list_cg.size() ; i++){
+
+            boolean exist = db.checkExist(list_cg.get(i));
+
+            if (!exist){
+                CheckGet checkGet = new CheckGet();
+                checkGet = list_cg.get(i);
+                checkGet.id = checkGet.getId();
+                checkGet.mobile = checkGet.getMobile();
+                checkGet.tavasote = checkGet.getTavasote();
+                checkGet.shomare_check = checkGet.getShomare_check();
+                checkGet.gheymat = checkGet.getGheymat();
+                checkGet.tozihat = checkGet.getTozihat();
+                checkGet.vaziat = checkGet.getVaziat();
+                checkGet.year = checkGet.getYear();
+                checkGet.month = checkGet.getMonth();
+                checkGet.day = checkGet.getDay();
+                checkGet.year_shamsi = checkGet.getYear_shamsi();
+                checkGet.month_shamsi = checkGet.getMonth_shamsi();
+                checkGet.day_shamsi = checkGet.getDay_shamsi();
+                db.addCheck(checkGet);
+            }
+
+        }
+        //reading
+        List<CheckGet> list_db = db.getAllCheckGet();
+
+        for (int i=0 ; i<list_db.size() ; i++) {
+            Log.d("get_id", list_db.get(i).getId());
+            Log.d("get_mobile", list_db.get(i).getMobile());
+            Log.d("get_tavasote", list_db.get(i).getTavasote());
+            Log.d("get_shomare_check", list_db.get(i).getShomare_check());
+            Log.d("get_gheymat", list_db.get(i).getGheymat());
+            Log.d("get_tozihat", list_db.get(i).getTozihat());
+            Log.d("get_vaziat", list_db.get(i).getVaziat());
+            Log.d("get_year", list_db.get(i).getYear());
+            Log.d("get_month", list_db.get(i).getMonth());
+            Log.d("get_day", list_db.get(i).getDay());
+            Log.d("get_year_shamsi", list_db.get(i).getYear_shamsi());
+            Log.d("get_month_shamsi", list_db.get(i).getMonth_shamsi());
+            Log.d("get_day_shamsi", list_db.get(i).getDay_shamsi());
+            Log.d("get_---", "---");
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    public void check_db_delete(String check_id){
+        CheckGetDbHelper db = new CheckGetDbHelper(getActivity());
+        db.deleteCheckGet(check_id);
+
+
+
+    }
+
+
+
 
 
 
